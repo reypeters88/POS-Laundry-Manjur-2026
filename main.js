@@ -483,9 +483,42 @@ window.parseDateString = function(dateStr, notaId) {
                 if (syncTimeout) clearTimeout(syncTimeout);
                 syncTimeout = setTimeout(async () => {
                     try {
-                        // Helper to split date and time for Google Sheets
-                        const splitDateWaktu = (key) => {
-                            let arr = JSON.parse(localStorage.getItem(key) || '[]');
+                        // PENGAMAN 1: Tarik data Cloud terlebih dahulu & gabungkan (Merge) agar tidak pernah menimpa/menghapus transaksi kasir lain
+                        let cloudPem = [];
+                        let cloudPeng = [];
+                        try {
+                            const pullResp = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now());
+                            const pullJson = await pullResp.json();
+                            if (pullJson && pullJson.status === 'success' && pullJson.data) {
+                                cloudPem = pullJson.data.pemasukan || [];
+                                cloudPeng = pullJson.data.pengeluaran || [];
+                            }
+                        } catch (pullErr) {
+                            console.warn('Pre-sync pull warning:', pullErr);
+                        }
+
+                        const localPem = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
+                        const localPeng = JSON.parse(localStorage.getItem('db_pengeluaran') || '[]');
+                        const safePem = typeof window.sanitizeAndMergePemasukan === 'function'
+                            ? window.sanitizeAndMergePemasukan(cloudPem, localPem)
+                            : localPem;
+                        const safePeng = typeof window.sanitizeAndMergePengeluaran === 'function'
+                            ? window.sanitizeAndMergePengeluaran(cloudPeng, localPeng)
+                            : localPeng;
+
+                        // PENGAMAN 2: Kunci batas minimum jumlah data (minimal 904 nota dasar & tidak boleh lebih kecil dari Cloud)
+                        const minBaseCount = (window.RECOVERED_PEMASUKAN && window.RECOVERED_PEMASUKAN.length) || 900;
+                        if (safePem.length < minBaseCount || safePem.length < cloudPem.length) {
+                            console.warn('Sync dibatalkan oleh sistem pengaman: jumlah data kurang dari batas aman.', safePem.length, cloudPem.length);
+                            return;
+                        }
+
+                        disableAutoSync = true;
+                        originalSetItem.call(localStorage, 'db_pemasukan', JSON.stringify(safePem));
+                        originalSetItem.call(localStorage, 'db_pengeluaran', JSON.stringify(safePeng));
+                        disableAutoSync = false;
+
+                        const formatDateWaktu = (arr) => {
                             return arr.map(t => {
                                 if (t.date && t.date.length > 10) {
                                     t.tanggal_saja = t.date.substring(0, 10);
@@ -497,8 +530,8 @@ window.parseDateString = function(dateStr, notaId) {
                         const payload = {
                             action: 'sync',
                             data: {
-                                pemasukan: splitDateWaktu('db_pemasukan'),
-                                pengeluaran: splitDateWaktu('db_pengeluaran'),
+                                pemasukan: formatDateWaktu(safePem),
+                                pengeluaran: formatDateWaktu(safePeng),
                                 pelanggan: JSON.parse(localStorage.getItem('db_pelanggan') || '[]'),
                                 inventory: JSON.parse(localStorage.getItem('db_inventory') || '[]'),
                                 Layanan: JSON.parse(localStorage.getItem('db_layanan') || '[]'),
@@ -511,7 +544,7 @@ window.parseDateString = function(dateStr, notaId) {
                             mode: 'no-cors',
                             body: JSON.stringify(payload)
                         }).then(() => {
-                            if (!silent) console.log('Auto-sync sent (no-cors mode)');
+                            if (!silent) console.log('Auto-sync sent (safe merged mode)');
                         }).catch(e => console.error('Auto-sync error:', e));
                     } catch (e) { console.error(e); }
                 }, 2000); // Debounce 2 seconds
@@ -587,10 +620,26 @@ window.parseDateString = function(dateStr, notaId) {
                 }
             };
 
-            // Intercept localStorage.setItem to auto-trigger sync when db changes
+            // Intercept localStorage.setItem to auto-trigger sync when db changes + protect against accidental data wipe
             const originalSetItem = localStorage.setItem;
             localStorage.setItem = function (key, value) {
-                originalSetItem.apply(this, arguments);
+                if (key === 'db_pemasukan' && typeof window.sanitizeAndMergePemasukan === 'function') {
+                    try {
+                        const incoming = JSON.parse(value || '[]');
+                        const minBase = (window.RECOVERED_PEMASUKAN && window.RECOVERED_PEMASUKAN.length) || 900;
+                        if (Array.isArray(incoming) && incoming.length < minBase) {
+                            value = JSON.stringify(window.sanitizeAndMergePemasukan(incoming));
+                        }
+                    } catch (e) {}
+                } else if (key === 'db_pengeluaran' && typeof window.sanitizeAndMergePengeluaran === 'function') {
+                    try {
+                        const incoming = JSON.parse(value || '[]');
+                        if (Array.isArray(incoming) && incoming.length < 15) {
+                            value = JSON.stringify(window.sanitizeAndMergePengeluaran(incoming));
+                        }
+                    } catch (e) {}
+                }
+                originalSetItem.call(this, key, value);
                 // Hanya trigger sync untuk kunci data utama
                 if (key.startsWith('db_') && !disableAutoSync) {
                     window.autoSyncToCloud();
@@ -679,15 +728,46 @@ window.parseDateString = function(dateStr, notaId) {
 
             if (btnSyncUp) {
                 btnSyncUp.addEventListener('click', async () => {
-                    const url = localStorage.getItem('webapp_url');
+                    const url = localStorage.getItem('webapp_url') || DEFAULT_API_URL;
                     if (!url) return window.showToast('Silakan simpan WebApp URL terlebih dahulu.');
 
                     try {
-                        showLoading('Mengirim data ke Google Sheets...');
-                        // Kumpulkan semua data lokal
-                        // Helper to split date and time for Google Sheets
-                        const splitDateWaktu = (key) => {
-                            let arr = JSON.parse(localStorage.getItem(key) || '[]');
+                        showLoading('Mengamankan & Mengirim data ke Google Sheets...');
+                        // PENGAMAN: Tarik data Cloud terlebih dahulu & gabungkan agar Sync Up tidak pernah menghapus data kasir lain
+                        let cloudPem = [];
+                        let cloudPeng = [];
+                        try {
+                            const pullResp = await fetch(url + (url.includes('?') ? '&' : '?') + 't=' + Date.now());
+                            const pullJson = await pullResp.json();
+                            if (pullJson && pullJson.status === 'success' && pullJson.data) {
+                                cloudPem = pullJson.data.pemasukan || [];
+                                cloudPeng = pullJson.data.pengeluaran || [];
+                            }
+                        } catch (pullErr) {
+                            console.warn('Pre-sync-up pull warning:', pullErr);
+                        }
+
+                        const localPem = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
+                        const localPeng = JSON.parse(localStorage.getItem('db_pengeluaran') || '[]');
+                        const safePem = typeof window.sanitizeAndMergePemasukan === 'function'
+                            ? window.sanitizeAndMergePemasukan(cloudPem, localPem)
+                            : localPem;
+                        const safePeng = typeof window.sanitizeAndMergePengeluaran === 'function'
+                            ? window.sanitizeAndMergePengeluaran(cloudPeng, localPeng)
+                            : localPeng;
+
+                        const minBaseCount = (window.RECOVERED_PEMASUKAN && window.RECOVERED_PEMASUKAN.length) || 900;
+                        if (safePem.length < minBaseCount || safePem.length < cloudPem.length) {
+                            if (window.Swal) Swal.fire('Pengaman Aktif', 'Pengiriman dibatalkan otomatis agar tidak mengurangi data di Cloud.', 'warning');
+                            return;
+                        }
+
+                        disableAutoSync = true;
+                        originalSetItem.call(localStorage, 'db_pemasukan', JSON.stringify(safePem));
+                        originalSetItem.call(localStorage, 'db_pengeluaran', JSON.stringify(safePeng));
+                        disableAutoSync = false;
+
+                        const formatDateWaktu = (arr) => {
                             return arr.map(t => {
                                 if (t.date && t.date.length > 10) {
                                     t.tanggal_saja = t.date.substring(0, 10);
@@ -699,8 +779,8 @@ window.parseDateString = function(dateStr, notaId) {
                         const payload = {
                             action: 'sync',
                             data: {
-                                pemasukan: splitDateWaktu('db_pemasukan'),
-                                pengeluaran: splitDateWaktu('db_pengeluaran'),
+                                pemasukan: formatDateWaktu(safePem),
+                                pengeluaran: formatDateWaktu(safePeng),
                                 pelanggan: JSON.parse(localStorage.getItem('db_pelanggan') || '[]'),
                                 inventory: JSON.parse(localStorage.getItem('db_inventory') || '[]'),
                                 Layanan: JSON.parse(localStorage.getItem('db_layanan') || '[]'),
@@ -712,12 +792,11 @@ window.parseDateString = function(dateStr, notaId) {
                         const response = await fetch(url, {
                             method: 'POST',
                             body: JSON.stringify(payload)
-                            // tidak perlu header Content-Type jika ke Google Apps Script agar menghindari preflight error jika belum dikonfigurasi
                         });
                         const result = await response.json();
 
                         if (result.status === 'success') {
-                            if (window.Swal) Swal.fire('Berhasil!', 'Data berhasil dikirim ke Google Sheets.', 'success');
+                            if (window.Swal) Swal.fire('Berhasil!', 'Data berhasil digabungkan & diamankan ke Google Sheets (' + safePem.length + ' nota).', 'success');
                         } else {
                             if (window.Swal) Swal.fire('Error', result.message || 'Gagal mengirim data', 'error');
                         }
