@@ -1,13 +1,13 @@
-const CACHE_NAME = 'manjur-laundry-v60';
+const CACHE_NAME = 'manjur-laundry-v62';
 const urlsToCache = [
   './',
   './index.html',
   './style.css',
   './style.css?v=10',
   './main.js',
-  './main.js?v=6.0',
+  './main.js?v=6.2',
   './laporan.js',
-  './laporan.js?v=6.0',
+  './laporan.js?v=6.2',
   './app.js',
   './manifest.json',
   './logo_manjur.png',

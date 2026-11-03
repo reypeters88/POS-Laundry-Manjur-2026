@@ -3,7 +3,8 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, minimum-scale=0.5, maximum-scale=3.0, user-scalable=yes">
     <title>Manjur Laundry</title>
     <!-- Preconnect resource hints for fast loading -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -224,7 +225,9 @@
             <!-- HEADER -->
             <header class="app-header" id="main-app-header">
                 <div class="header-left" style="display: flex; align-items: center;">
-                    <i class="fa-solid fa-arrow-left" id="btn-back-from-beranda" style="display: none; margin-right: 15px; font-size: 1.2rem; cursor: pointer; color: #1e293b;" onclick="document.querySelector('.b-nav-btn[data-bnav=\'laporan\']')?.click(); this.style.display = 'none';"></i>
+                    <i class="fa-solid fa-arrow-left" id="btn-back-from-beranda"
+                        style="display: none; margin-right: 15px; font-size: 1.2rem; cursor: pointer; color: #1e293b;"
+                        onclick="document.querySelector('.b-nav-btn[data-bnav=\'laporan\']')?.click(); this.style.display = 'none';"></i>
                     <img src="logo_manjur.png" alt="Logo Manjur" class="app-logo dynamic-logo">
                     <div class="greeting">
                         <h1 class="text-greeting">Hai, <span class="dynamic-company-name">Manjur Laundry</span></h1>
@@ -237,16 +240,20 @@
                         <i class="fa-solid fa-user-circle" style="font-size: 0.9rem;"></i> <span
                             id="active-user-badge">Kasir</span>
                     </div>
-                    <button class="btn-icon" onclick="window.adjustAppZoom(-0.05)" title="Perkecil Tampilan (Zoom Out)" style="color: #475569;">
+                    <button class="btn-icon" onclick="window.adjustAppZoom(-0.05)" title="Perkecil Tampilan (Zoom Out)"
+                        style="color: #475569;">
                         <i class="fa-solid fa-magnifying-glass-minus"></i>
                     </button>
-                    <button class="btn-icon" onclick="window.adjustAppZoom(0.05)" title="Perbesar Tampilan (Zoom In)" style="color: #475569;">
+                    <button class="btn-icon" onclick="window.adjustAppZoom(0.05)" title="Perbesar Tampilan (Zoom In)"
+                        style="color: #475569;">
                         <i class="fa-solid fa-magnifying-glass-plus"></i>
                     </button>
-                    <button class="btn-icon btn-refresh-header" onclick="window.handleAppRefresh()" title="Refresh Aplikasi">
+                    <button class="btn-icon btn-refresh-header" onclick="window.handleAppRefresh()"
+                        title="Refresh Aplikasi">
                         <i class="fa-solid fa-rotate-right"></i>
                     </button>
-                    <button class="btn-icon btn-excel-header" id="btn-export-excel" title="Export Excel" onclick="window.handleHeaderExportExcel()">
+                    <button class="btn-icon btn-excel-header" id="btn-export-excel" title="Export Excel"
+                        onclick="window.handleHeaderExportExcel()">
                         <i class="fa-solid fa-file-excel"></i>
                     </button>
                     <button class="btn-icon" id="btn-export-pdf" title="Export PDF" style="display: none;">
@@ -414,29 +421,55 @@
                             <button id="btn-ringkasan-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:#f1f5f9; font-family:inherit; font-size:0.8rem; font-weight:600; color:#475569; padding:6px 12px; cursor:pointer; outline:none; border-radius:20px; display:flex; align-items:center; gap:6px;">
                                 <span id="text-ringkasan-filter">Bulan Ini</span>
-                                <i class="fa-solid fa-caret-down"
-                                    style="font-size:0.8rem; color:#64748b;"></i>
+                                <i class="fa-solid fa-caret-down" style="font-size:0.8rem; color:#64748b;"></i>
                             </button>
                         </div>
                         <div id="ringkasan-date-text"
                             style="font-size:0.8rem; color:#94a3b8; display:none; margin-left: 10px;"></div>
                     </div>
-                    
+
                     <!-- ACCORDION DATE FILTER OPTIONS -->
-                    <div id="modal-date-filter" style="display: none; padding: 15px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; animation: fadeInDown 0.2s ease-out;">
+                    <div id="modal-date-filter"
+                        style="display: none; padding: 15px; background: #f8fafc; border-bottom: 1px solid #e2e8f0; animation: fadeInDown 0.2s ease-out;">
                         <div id="date-filter-options" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px;">
-                            <div class="filter-opt" data-val="hari-ini" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">Hari Ini</div>
-                            <div class="filter-opt" data-val="kemarin" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">Kemarin</div>
-                            <div class="filter-opt" data-val="7-hari" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">7 Hari</div>
-                            <div class="filter-opt" data-val="30-hari" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">30 Hari</div>
-                            <div class="filter-opt active" data-val="bulan-ini" style="padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 500; text-align: center; background: #e0f2fe; color: #0ea5e9; border: 1px solid #bae6fd; font-size: 0.85rem;">Bulan Ini</div>
-                            <div class="filter-opt" data-val="per-bulan" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">Pilih Bulan</div>
-                            <div class="filter-opt" data-val="semua" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">Semua</div>
-                            <div class="filter-opt" data-val="per-tanggal" style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">Per Tanggal</div>
+                            <div class="filter-opt" data-val="hari-ini"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                Hari Ini</div>
+                            <div class="filter-opt" data-val="kemarin"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                Kemarin</div>
+                            <div class="filter-opt" data-val="7-hari"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                7 Hari</div>
+                            <div class="filter-opt" data-val="30-hari"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                30 Hari</div>
+                            <div class="filter-opt active" data-val="bulan-ini"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; font-weight: 500; text-align: center; background: #e0f2fe; color: #0ea5e9; border: 1px solid #bae6fd; font-size: 0.85rem;">
+                                Bulan Ini</div>
+                            <div class="filter-opt" data-val="per-bulan"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                Pilih Bulan</div>
+                            <div class="filter-opt" data-val="semua"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                Semua</div>
+                            <div class="filter-opt" data-val="per-tanggal"
+                                style="padding: 10px; border-radius: 8px; cursor: pointer; color: #334155; font-weight: 500; text-align: center; background: #fff; border: 1px solid #cbd5e1; font-size: 0.85rem;">
+                                Per Tanggal</div>
                         </div>
                     </div>
                     <style>
-                        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+                        @keyframes fadeInDown {
+                            from {
+                                opacity: 0;
+                                transform: translateY(-10px);
+                            }
+
+                            to {
+                                opacity: 1;
+                                transform: translateY(0);
+                            }
+                        }
                     </style>
 
                     <div class="chart-container">
@@ -445,15 +478,65 @@
 
                     <div style="padding: 10px 15px; display: flex; flex-direction: column; gap: 15px;">
                         <style>
-                            .finance-row { display:flex; justify-content:space-between; align-items:center; padding:10px 12px; border-bottom:1px solid #f1f5f9; transition:all 0.2s; border-radius:8px; }
-                            .finance-row:hover { background: #f8fafc; transform: translateX(4px); }
-                            .finance-row:last-child { border-bottom:none; }
-                            .finance-icon { width:24px; height:24px; border-radius:6px; display:flex; align-items:center; justify-content:center; font-size:0.7rem; margin-right:10px; }
-                            .finance-label { font-size:0.8rem; color:#475569; font-weight:500; display:flex; align-items:center; }
-                            .finance-val { font-size:0.9rem; font-weight:700; display:flex; align-items:center; gap:4px; }
-                            .finance-rp { font-size:0.65rem; font-weight:600; color:#94a3b8; }
-                            .clickable-row { cursor:pointer; }
-                            .clickable-row:hover .finance-label { color: #0ea5e9; }
+                            .finance-row {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding: 10px 12px;
+                                border-bottom: 1px solid #f1f5f9;
+                                transition: all 0.2s;
+                                border-radius: 8px;
+                            }
+
+                            .finance-row:hover {
+                                background: #f8fafc;
+                                transform: translateX(4px);
+                            }
+
+                            .finance-row:last-child {
+                                border-bottom: none;
+                            }
+
+                            .finance-icon {
+                                width: 24px;
+                                height: 24px;
+                                border-radius: 6px;
+                                display: flex;
+                                align-items: center;
+                                justify-content: center;
+                                font-size: 0.7rem;
+                                margin-right: 10px;
+                            }
+
+                            .finance-label {
+                                font-size: 0.8rem;
+                                color: #475569;
+                                font-weight: 500;
+                                display: flex;
+                                align-items: center;
+                            }
+
+                            .finance-val {
+                                font-size: 0.9rem;
+                                font-weight: 700;
+                                display: flex;
+                                align-items: center;
+                                gap: 4px;
+                            }
+
+                            .finance-rp {
+                                font-size: 0.65rem;
+                                font-weight: 600;
+                                color: #94a3b8;
+                            }
+
+                            .clickable-row {
+                                cursor: pointer;
+                            }
+
+                            .clickable-row:hover .finance-label {
+                                color: #0ea5e9;
+                            }
                         </style>
                         <!-- Card: Ringkasan Keuangan -->
                         <div
@@ -468,52 +551,105 @@
                             </div>
                             <div style="display:flex; flex-direction:column; gap:4px;">
                                 <div class="finance-row clickable-row" onclick="window.bukaDetailRingkasan('omzet')">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#e0e7ff; color:#4f46e5;"><i class="fa-solid fa-chart-line"></i></div> Total Omzet</div>
-                                    <div class="finance-val" style="color:#1e293b;"><span class="finance-rp">Rp</span><span id="summary-omzet">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#e0e7ff; color:#4f46e5;"><i
+                                                class="fa-solid fa-chart-line"></i></div> Total Omzet
+                                    </div>
+                                    <div class="finance-val" style="color:#1e293b;"><span
+                                            class="finance-rp">Rp</span><span id="summary-omzet">0</span></div>
                                 </div>
-                                <div class="finance-row clickable-row" onclick="window.bukaDetailRingkasan('pendapatan')">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#dcfce7; color:#16a34a;"><i class="fa-solid fa-arrow-down"></i></div> Pendapatan Transaksi</div>
-                                    <div class="finance-val" style="color:#10b981;"><span class="finance-rp">Rp</span><span id="summary-pendapatan">0</span></div>
-                                </div>
-                                <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i class="fa-solid fa-box-open"></i></div> Pendapatan TopUp Paket</div>
-                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-topup-paket">0</span></div>
-                                </div>
-                                <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i class="fa-solid fa-money-bill-transfer"></i></div> Pendapatan TopUp Deposit</div>
-                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-topup-deposit">0</span></div>
-                                </div>
-                                <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i class="fa-solid fa-bag-shopping"></i></div> Pendapatan Jual Produk</div>
-                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-jual-produk">0</span></div>
+                                <div class="finance-row clickable-row"
+                                    onclick="window.bukaDetailRingkasan('pendapatan')">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#dcfce7; color:#16a34a;"><i
+                                                class="fa-solid fa-arrow-down"></i></div> Pendapatan Transaksi
+                                    </div>
+                                    <div class="finance-val" style="color:#10b981;"><span
+                                            class="finance-rp">Rp</span><span id="summary-pendapatan">0</span></div>
                                 </div>
                                 <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i class="fa-solid fa-washing-machine"></i></div> Pendapatan Self Service</div>
-                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-self-service">0</span></div>
-                                </div>
-                                <div class="finance-row clickable-row" onclick="window.bukaDetailRingkasan('pendapatan-lain')">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#ffedd5; color:#ea580c;"><i class="fa-solid fa-coins"></i></div> Pendapatan Lain</div>
-                                    <div class="finance-val" style="color:#ea580c; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-pendapatan-lain">0</span></div>
-                                </div>
-                                <div class="finance-row clickable-row" onclick="window.bukaDetailRingkasan('pengeluaran')">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#fee2e2; color:#ef4444;"><i class="fa-solid fa-arrow-up"></i></div> Pengeluaran</div>
-                                    <div class="finance-val" style="color:#ef4444;"><span class="finance-rp">Rp</span><span id="summary-pengeluaran">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i
+                                                class="fa-solid fa-box-open"></i></div> Pendapatan TopUp Paket
+                                    </div>
+                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-topup-paket">0</span></div>
                                 </div>
                                 <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#fef3c7; color:#d97706;"><i class="fa-solid fa-hand-holding-dollar"></i></div> Kasbon</div>
-                                    <div class="finance-val" style="color:#d97706; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-kasbon">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i
+                                                class="fa-solid fa-money-bill-transfer"></i></div> Pendapatan TopUp
+                                        Deposit
+                                    </div>
+                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-topup-deposit">0</span></div>
+                                </div>
+                                <div class="finance-row">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i
+                                                class="fa-solid fa-bag-shopping"></i></div> Pendapatan Jual Produk
+                                    </div>
+                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-jual-produk">0</span></div>
+                                </div>
+                                <div class="finance-row">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i
+                                                class="fa-solid fa-washing-machine"></i></div> Pendapatan Self Service
+                                    </div>
+                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-self-service">0</span></div>
+                                </div>
+                                <div class="finance-row clickable-row"
+                                    onclick="window.bukaDetailRingkasan('pendapatan-lain')">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#ffedd5; color:#ea580c;"><i
+                                                class="fa-solid fa-coins"></i></div> Pendapatan Lain
+                                    </div>
+                                    <div class="finance-val" style="color:#ea580c; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-pendapatan-lain">0</span>
+                                    </div>
+                                </div>
+                                <div class="finance-row clickable-row"
+                                    onclick="window.bukaDetailRingkasan('pengeluaran')">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#fee2e2; color:#ef4444;"><i
+                                                class="fa-solid fa-arrow-up"></i></div> Pengeluaran
+                                    </div>
+                                    <div class="finance-val" style="color:#ef4444;"><span
+                                            class="finance-rp">Rp</span><span id="summary-pengeluaran">0</span></div>
+                                </div>
+                                <div class="finance-row">
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#fef3c7; color:#d97706;"><i
+                                                class="fa-solid fa-hand-holding-dollar"></i></div> Kasbon
+                                    </div>
+                                    <div class="finance-val" style="color:#d97706; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-kasbon">0</span></div>
                                 </div>
                                 <div class="finance-row clickable-row" onclick="window.bukaDetailRingkasan('labarugi')">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#e0f2fe; color:#0ea5e9;"><i class="fa-solid fa-scale-balanced"></i></div> Laba Rugi</div>
-                                    <div class="finance-val" style="color:#0ea5e9;"><span class="finance-rp">Rp</span><span id="summary-labarugi">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#e0f2fe; color:#0ea5e9;"><i
+                                                class="fa-solid fa-scale-balanced"></i></div> Laba Rugi
+                                    </div>
+                                    <div class="finance-val" style="color:#0ea5e9;"><span
+                                            class="finance-rp">Rp</span><span id="summary-labarugi">0</span></div>
                                 </div>
                                 <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f3f4f6; color:#4b5563;"><i class="fa-solid fa-file-invoice-dollar"></i></div> Piutang</div>
-                                    <div class="finance-val" style="color:#475569;"><span class="finance-rp">Rp</span><span id="summary-piutang">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f3f4f6; color:#4b5563;"><i
+                                                class="fa-solid fa-file-invoice-dollar"></i></div> Piutang
+                                    </div>
+                                    <div class="finance-val" style="color:#475569;"><span
+                                            class="finance-rp">Rp</span><span id="summary-piutang">0</span></div>
                                 </div>
                                 <div class="finance-row">
-                                    <div class="finance-label"><div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i class="fa-solid fa-coins"></i></div> Pembulatan</div>
-                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span class="finance-rp">Rp</span><span id="summary-pembulatan">0</span></div>
+                                    <div class="finance-label">
+                                        <div class="finance-icon" style="background:#f1f5f9; color:#64748b;"><i
+                                                class="fa-solid fa-coins"></i></div> Pembulatan
+                                    </div>
+                                    <div class="finance-val" style="color:#334155; font-weight:600;"><span
+                                            class="finance-rp">Rp</span><span id="summary-pembulatan">0</span></div>
                                 </div>
                             </div>
                         </div>
@@ -533,36 +669,43 @@
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Transaksi Masuk</span>
-                                    <span id="stat-trxmasuk" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0 Transaksi</span>
+                                    <span id="stat-trxmasuk" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0
+                                        Transaksi</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">TopUp Paket</span>
-                                    <span id="stat-trx-topup-paket" style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
+                                    <span id="stat-trx-topup-paket"
+                                        style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">TopUp Deposit</span>
-                                    <span id="stat-trx-topup-deposit" style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
+                                    <span id="stat-trx-topup-deposit"
+                                        style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Jual Produk</span>
-                                    <span id="stat-trx-jual-produk" style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
+                                    <span id="stat-trx-jual-produk"
+                                        style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Pembelian Produk</span>
-                                    <span id="stat-trx-beli-produk" style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
+                                    <span id="stat-trx-beli-produk"
+                                        style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Self Service</span>
-                                    <span id="stat-trx-self-service" style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
+                                    <span id="stat-trx-self-service"
+                                        style="font-size:0.8rem; font-weight:600; color:#334155;">0 Transaksi</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <span style="font-size:0.75rem; color:#64748b;">Dibatalkan</span>
-                                    <span id="stat-trx-batal" style="font-size:0.8rem; font-weight:700; color:#ef4444;">0 Transaksi</span>
+                                    <span id="stat-trx-batal"
+                                        style="font-size:0.8rem; font-weight:700; color:#ef4444;">0 Transaksi</span>
                                 </div>
                             </div>
                         </div>
@@ -582,16 +725,19 @@
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Total Masuk Kiloan</span>
-                                    <span id="vol-kiloan" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0 Kg</span>
+                                    <span id="vol-kiloan" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0
+                                        Kg</span>
                                 </div>
                                 <div
                                     style="display:flex; justify-content:space-between; align-items:center; padding-bottom:8px; border-bottom:1px dashed #f1f5f9;">
                                     <span style="font-size:0.75rem; color:#64748b;">Total Masuk Satuan</span>
-                                    <span id="vol-satuan" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0 Satuan</span>
+                                    <span id="vol-satuan" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0
+                                        Satuan</span>
                                 </div>
                                 <div style="display:flex; justify-content:space-between; align-items:center;">
                                     <span style="font-size:0.75rem; color:#64748b;">Total Masuk Meter</span>
-                                    <span id="vol-meter" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0.0 m&sup2;</span>
+                                    <span id="vol-meter" style="font-size:0.8rem; font-weight:700; color:#1e293b;">0.0
+                                        m&sup2;</span>
                                 </div>
                             </div>
                         </div>
@@ -605,7 +751,8 @@
                 <div id="tab-kepegawaian" class="tab-content"
                     style="display: none; background: #f8fafc; min-height: calc(100vh - 70px); color: #1e293b; padding: 0;">
                     <div style="padding: 20px 15px 10px 15px;">
-                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 20px;">Kinerja Pegawai</h2>
+                        <h2 style="font-size: 1.5rem; font-weight: 700; color: #1e293b; margin-bottom: 20px;">Kinerja
+                            Pegawai</h2>
 
                         <!-- Search Bar -->
                         <div style="position: relative; margin-bottom: 25px;">
@@ -616,7 +763,8 @@
                         </div>
 
                         <!-- Ongoing / Sedang Bekerja -->
-                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 15px;">Pekerja Aktif Hari Ini</h3>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 15px;">Pekerja
+                            Aktif Hari Ini</h3>
                         <div id="ongoing-pegawai-container"
                             style="background: linear-gradient(135deg, #0ea5e9, #3b82f6); border-radius: 12px; padding: 15px; display: flex; align-items: center; justify-content: space-between; margin-bottom: 25px; box-shadow: 0 4px 15px rgba(14, 165, 233, 0.2);">
                             <!-- Data will be injected here via JS -->
@@ -632,10 +780,12 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <!-- LAYOUT DETAIL PEGAWAI -->
-                <div id="layout-detail-pegawai" class="layout" style="display: none; background: #f8fafc; min-height: 100vh; position:relative;">
-                    <header class="cd-header" style="box-shadow: none; border-bottom: 1px solid #e2e8f0; background: #ffffff;">
+                <div id="layout-detail-pegawai" class="layout"
+                    style="display: none; background: #f8fafc; min-height: 100vh; position:relative;">
+                    <header class="cd-header"
+                        style="box-shadow: none; border-bottom: 1px solid #e2e8f0; background: #ffffff;">
                         <button class="btn-icon" id="btn-back-detail-pegawai" style="color: #64748b;">
                             <i class="fa-solid fa-arrow-left"></i>
                         </button>
@@ -646,28 +796,45 @@
                     </header>
                     <div style="padding: 20px 15px;">
                         <!-- Profile Card -->
-                        <div style="background: #ffffff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #e2e8f0;">
-                            <div id="detail-pegawai-avatar" style="width: 70px; height: 70px; background: #e0f2fe; color: #0ea5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold; margin: 0 auto 10px auto;">A</div>
-                            <h2 id="detail-pegawai-nama" style="font-size: 1.3rem; margin-bottom: 5px; color: #1e293b; font-weight: 700;">Nama Pegawai</h2>
-                            <p id="detail-pegawai-role" style="font-size: 0.95rem; color: #64748b; font-weight: 500;">Role</p>
+                        <div
+                            style="background: #ffffff; border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 20px; border: 1px solid #e2e8f0;">
+                            <div id="detail-pegawai-avatar"
+                                style="width: 70px; height: 70px; background: #e0f2fe; color: #0ea5e9; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 2rem; font-weight: bold; margin: 0 auto 10px auto;">
+                                A</div>
+                            <h2 id="detail-pegawai-nama"
+                                style="font-size: 1.3rem; margin-bottom: 5px; color: #1e293b; font-weight: 700;">Nama
+                                Pegawai</h2>
+                            <p id="detail-pegawai-role" style="font-size: 0.95rem; color: #64748b; font-weight: 500;">
+                                Role</p>
                         </div>
-                        
+
                         <!-- Summary Stats -->
                         <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px;">
-                            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                                <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Total Pekerjaan</div>
-                                <div id="detail-pegawai-qty" style="font-size: 1.3rem; font-weight: 800; color: #0ea5e9;">0</div>
+                            <div
+                                style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                <div
+                                    style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">
+                                    Total Pekerjaan</div>
+                                <div id="detail-pegawai-qty"
+                                    style="font-size: 1.3rem; font-weight: 800; color: #0ea5e9;">0</div>
                             </div>
-                            <div style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-                                <div style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">Estimasi Komisi</div>
-                                <div id="detail-pegawai-komisi" style="font-size: 1.2rem; font-weight: 800; color: #10b981;">Rp 0</div>
+                            <div
+                                style="background: #ffffff; border: 1px solid #e2e8f0; border-radius: 12px; padding: 15px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+                                <div
+                                    style="font-size: 0.8rem; color: #64748b; margin-bottom: 5px; font-weight: 600; text-transform: uppercase;">
+                                    Estimasi Komisi</div>
+                                <div id="detail-pegawai-komisi"
+                                    style="font-size: 1.2rem; font-weight: 800; color: #10b981;">Rp 0</div>
                             </div>
                         </div>
 
                         <!-- Transaction List -->
-                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 15px;">Daftar Tugas Diselesaikan</h3>
-                        <div id="detail-pegawai-empty" style="display:none; text-align:center; padding:30px 10px; color:#94a3b8; font-size:0.9rem; background:#ffffff; border-radius:12px; border:1px dashed #cbd5e1;">
-                            <i class="fa-solid fa-box-open" style="font-size:2rem; margin-bottom:10px; color:#cbd5e1;"></i><br>
+                        <h3 style="font-size: 1.05rem; font-weight: 700; color: #1e293b; margin-bottom: 15px;">Daftar
+                            Tugas Diselesaikan</h3>
+                        <div id="detail-pegawai-empty"
+                            style="display:none; text-align:center; padding:30px 10px; color:#94a3b8; font-size:0.9rem; background:#ffffff; border-radius:12px; border:1px dashed #cbd5e1;">
+                            <i class="fa-solid fa-box-open"
+                                style="font-size:2rem; margin-bottom:10px; color:#cbd5e1;"></i><br>
                             Belum ada tugas yang diselesaikan.
                         </div>
                         <div id="detail-pegawai-list" style="display:flex; flex-direction:column; gap:10px;">
@@ -686,7 +853,8 @@
                                     style="font-size: 1.2rem; cursor: pointer; color: var(--text-dark); margin-right: 15px;"></i>
                                 <img src="logo_manjur.png" alt="Logo Manjur" class="app-logo dynamic-logo">
                                 <div class="greeting">
-                                    <h1 class="text-greeting">Hai, <span class="dynamic-company-name">Manjur Laundry</span>
+                                    <h1 class="text-greeting">Hai, <span class="dynamic-company-name">Manjur
+                                            Laundry</span>
                                     </h1>
                                     <p class="text-sub">Ini status orderan kamu</p>
                                 </div>
@@ -697,10 +865,12 @@
                                     <i class="fa-solid fa-user-circle" style="font-size: 0.9rem;"></i> <span
                                         class="active-user-badge">Kasir</span>
                                 </div>
-                                <button class="btn-icon" onclick="window.adjustAppZoom(-0.05)" title="Perkecil Tampilan (Zoom Out)" style="color: #475569;">
+                                <button class="btn-icon" onclick="window.adjustAppZoom(-0.05)"
+                                    title="Perkecil Tampilan (Zoom Out)" style="color: #475569;">
                                     <i class="fa-solid fa-magnifying-glass-minus"></i>
                                 </button>
-                                <button class="btn-icon" onclick="window.adjustAppZoom(0.05)" title="Perbesar Tampilan (Zoom In)" style="color: #475569;">
+                                <button class="btn-icon" onclick="window.adjustAppZoom(0.05)"
+                                    title="Perbesar Tampilan (Zoom In)" style="color: #475569;">
                                     <i class="fa-solid fa-magnifying-glass-plus"></i>
                                 </button>
                                 <button class="btn-icon" id="btn-search-pesanan" title="Cari Pesanan">
@@ -709,7 +879,8 @@
                                 <button class="btn-icon" id="btn-refresh-pesanan" title="Refresh Pesanan">
                                     <i class="fa-solid fa-clock-rotate-left"></i>
                                 </button>
-                                <button class="btn-icon btn-excel-header" id="btn-export-pesanan-excel" onclick="window.exportPesananKeExcel()" title="Export Excel">
+                                <button class="btn-icon btn-excel-header" id="btn-export-pesanan-excel"
+                                    onclick="window.exportPesananKeExcel()" title="Export Excel">
                                     <i class="fa-solid fa-file-excel"></i>
                                 </button>
                             </div>
@@ -794,14 +965,42 @@
                         <!-- Header Row (Topline Wrapper) -->
                         <div class="pesanan-header-wrapper" id="pesanan-header-wrapper">
                             <div class="pesanan-header-row">
-                                <div class="h-col" style="cursor: pointer; white-space: nowrap;" onclick="window.sortPesanan('id')">ID <i class="fa-solid fa-sort" style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
-                                <div class="h-col" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="window.sortPesanan('date')">TANGGAL <i class="fa-solid fa-sort" style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
-                                <div class="h-col" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="window.sortPesanan('customerName')">PELANGGAN <i class="fa-solid fa-sort" style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
-                                <div class="h-col">LAYANAN & QTY</div>
-                                <div class="h-col">TOTAL</div>
-                                <div class="h-col" style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" onclick="window.sortPesanan('paymentStatus')">STATUS BAYAR <i class="fa-solid fa-sort" style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
-                                <div class="h-col">METODE</div>
-                                <div class="h-col">PROGRES</div>
+                                <div class="h-col" data-sort-col="id"
+                                    style="cursor: pointer; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('id')">ID <i class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="date"
+                                    style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('date')">TANGGAL <i
+                                        class="fa-solid fa-sort-down sort-icon"
+                                        style="color:#0ea5e9; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="customerName"
+                                    style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('customerName')">PELANGGAN <i
+                                        class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="service"
+                                    style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('service')">LAYANAN & QTY <i
+                                        class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="total"
+                                    style="cursor: pointer; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('total')">TOTAL <i class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="paymentStatus"
+                                    style="cursor: pointer; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('paymentStatus')">STATUS BAYAR <i
+                                        class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="method"
+                                    style="cursor: pointer; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('method')">METODE <i class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
+                                <div class="h-col" data-sort-col="status"
+                                    style="cursor: pointer; white-space: nowrap; user-select: none;"
+                                    onclick="window.sortPesanan('status')">PROGRES <i class="fa-solid fa-sort sort-icon"
+                                        style="color:#94a3b8; font-size:0.8rem; margin-left:3px;"></i></div>
                                 <div class="h-col" style="text-align: right; padding-right: 5px;">AKSI & NOTA</div>
                             </div>
                         </div>
@@ -1074,10 +1273,11 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f0f9ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-users" style="color: #3b82f6;"></i></div>
+                                        <i class="fa-solid fa-users" style="color: #3b82f6;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Pelanggan
-                                             Saya</div>
+                                            Saya</div>
                                         <div style="font-size: 0.75rem; color: #64748b;">Kelola data pelanggan</div>
                                     </div>
                                     <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 0.9rem;"></i>
@@ -1086,7 +1286,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f0f9ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-store" style="color: #3b82f6;"></i></div>
+                                        <i class="fa-solid fa-store" style="color: #3b82f6;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Kelola Outlet
                                         </div>
@@ -1099,7 +1300,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f0f9ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-shirt" style="color: #3b82f6;"></i></div>
+                                        <i class="fa-solid fa-shirt" style="color: #3b82f6;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Kelola
                                             Layanan</div>
@@ -1112,7 +1314,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f0f9ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-wallet" style="color: #3b82f6;"></i></div>
+                                        <i class="fa-solid fa-wallet" style="color: #3b82f6;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Kelola
                                             Keuangan</div>
@@ -1144,11 +1347,13 @@
                                 Pengaturan & Lainnya</div>
                             <div
                                 style="background: #ffffff; border-radius: 12px; border: 1px solid #e2e8f0; overflow: hidden; box-shadow: 0 1px 2px rgba(0,0,0,0.02);">
-                                <div id="btn-menu-pengaturan-printer" class="clickable-menu" data-title="Pengaturan Printer"
+                                <div id="btn-menu-pengaturan-printer" class="clickable-menu"
+                                    data-title="Pengaturan Printer"
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f8fafc; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-print" style="color: #64748b;"></i></div>
+                                        <i class="fa-solid fa-print" style="color: #64748b;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Pengaturan
                                             Printer</div>
@@ -1159,7 +1364,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f8fafc; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-gear" style="color: #64748b;"></i></div>
+                                        <i class="fa-solid fa-gear" style="color: #64748b;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Pengaturan
                                             Lainnya</div>
@@ -1170,7 +1376,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-bottom: 1px solid #f1f5f9; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #f0fdf4; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-globe" style="color: #22c55e;"></i></div>
+                                        <i class="fa-solid fa-globe" style="color: #22c55e;"></i>
+                                    </div>
                                     <div style="flex-grow: 1; display: flex; align-items: center; gap: 8px;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Go Online
                                         </div>
@@ -1184,7 +1391,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid #f1f5f9; display: none;">
                                     <div
                                         style="width: 35px; height: 35px; background: #e0e7ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-users-gear" style="color: #4f46e5;"></i></div>
+                                        <i class="fa-solid fa-users-gear" style="color: #4f46e5;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Manajemen
                                             Pengguna (Admin)</div>
@@ -1195,21 +1403,25 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid #f1f5f9;">
                                     <div
                                         style="width: 35px; height: 35px; background: #fdf4ff; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-download" style="color: #d946ef;"></i></div>
+                                        <i class="fa-solid fa-download" style="color: #d946ef;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Backup Data
                                         </div>
                                     </div>
                                     <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 0.9rem;"></i>
                                 </div>
-                                <input type="file" id="input-restore-backup" accept=".json" style="display:none;" onchange="if(window.importBackupData) window.importBackupData(event)">
+                                <input type="file" id="input-restore-backup" accept=".json" style="display:none;"
+                                    onchange="if(window.importBackupData) window.importBackupData(event)">
                                 <div onclick="document.getElementById('input-restore-backup').click()"
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer; border-bottom: 1px solid #f1f5f9;">
                                     <div
                                         style="width: 35px; height: 35px; background: #fffbeb; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-upload" style="color: #d97706;"></i></div>
+                                        <i class="fa-solid fa-upload" style="color: #d97706;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
-                                        <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Upload Data Backup
+                                        <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Upload Data
+                                            Backup
                                         </div>
                                     </div>
                                     <i class="fa-solid fa-chevron-right" style="color: #cbd5e1; font-size: 0.9rem;"></i>
@@ -1218,7 +1430,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; cursor: pointer;">
                                     <div
                                         style="width: 35px; height: 35px; background: #fefce8; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-circle-question" style="color: #eab308;"></i></div>
+                                        <i class="fa-solid fa-circle-question" style="color: #eab308;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #1e293b; font-size: 0.95rem;">Bantuan &
                                             Informasi</div>
@@ -1229,7 +1442,8 @@
                                     style="padding: 15px; display: flex; align-items: center; gap: 15px; border-top: 1px solid #f1f5f9; cursor: pointer; margin-top: 10px;">
                                     <div
                                         style="width: 35px; height: 35px; background: #fee2e2; border-radius: 8px; display: flex; justify-content: center; align-items: center;">
-                                        <i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i></div>
+                                        <i class="fa-solid fa-right-from-bracket" style="color: #ef4444;"></i>
+                                    </div>
                                     <div style="flex-grow: 1;">
                                         <div style="font-weight: 600; color: #ef4444; font-size: 0.95rem;">Keluar Akun
                                             (Ganti Profil)</div>
@@ -1284,8 +1498,10 @@
                 <!-- HIDDEN SEARCH INPUT -->
                 <div id="kp-search-container" style="display: none; padding: 0 20px 15px 20px;">
                     <div style="position: relative;">
-                        <i class="fa-solid fa-magnifying-glass" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
-                        <input type="text" id="input-search-kp" placeholder="Cari nama atau telepon..." style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 12px; border: 1px solid #cbd5e1; outline: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: #fff;">
+                        <i class="fa-solid fa-magnifying-glass"
+                            style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #64748b;"></i>
+                        <input type="text" id="input-search-kp" placeholder="Cari nama atau telepon..."
+                            style="width: 100%; padding: 12px 15px 12px 40px; border-radius: 12px; border: 1px solid #cbd5e1; outline: none; font-family: 'Plus Jakarta Sans', sans-serif; font-size: 0.9rem; box-sizing: border-box; background: #fff;">
                     </div>
                 </div>
 
@@ -1297,7 +1513,8 @@
                         <div class="kp-chip">Online</div>
                         <div class="kp-chip">By Grup</div>
                     </div>
-                    <div class="kp-sort" onclick="window.toggleSortPelanggan()" style="cursor: pointer;" title="Urutkan Pelanggan">
+                    <div class="kp-sort" onclick="window.toggleSortPelanggan()" style="cursor: pointer;"
+                        title="Urutkan Pelanggan">
                         A<i class="fa-solid fa-arrow-down-a-z"></i>Z
                     </div>
                 </div>
@@ -2085,13 +2302,15 @@
         </div>
 
         <!-- LAYOUT DETAIL PELANGGAN -->
-        <div id="layout-detail-pelanggan" class="layout" style="display: none; background: #f3f4f6; min-height: 100vh; padding-bottom: 80px; position: relative;">
+        <div id="layout-detail-pelanggan" class="layout"
+            style="display: none; background: #f3f4f6; min-height: 100vh; padding-bottom: 80px; position: relative;">
             <header class="cd-header">
                 <button class="btn-icon" id="btn-back-cd" style="color: #64748b;">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 25px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 25px; border-radius: 4px;">
                 </div>
                 <button class="btn-icon" style="color: #64748b; font-size: 1.2rem;">
                     <i class="fa-solid fa-gear"></i>
@@ -2099,19 +2318,24 @@
             </header>
 
             <!-- Search Area -->
-            <div style="background: #ffffff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0;">
-                <div id="cd-search-name" style="font-size: 1.1rem; font-weight: 600; color: #1e293b;">Nama Pelanggan</div>
+            <div
+                style="background: #ffffff; padding: 15px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #e2e8f0;">
+                <div id="cd-search-name" style="font-size: 1.1rem; font-weight: 600; color: #1e293b;">Nama Pelanggan
+                </div>
                 <i class="fa-solid fa-gear" style="color: #64748b; font-size: 1.2rem;"></i>
             </div>
-            
+
             <div style="padding: 15px 20px; display: flex; flex-direction: column; gap: 15px;">
                 <!-- Profil & Kontak Card -->
                 <div class="cd-card">
-                    <div class="cd-card-title" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div class="cd-card-title"
+                        style="display: flex; justify-content: space-between; align-items: center;">
                         <span>Profil & Kontak</span>
                         <div style="display: flex; gap: 10px;">
-                            <a href="#" id="cd-wa-link" target="_blank" style="color: #22c55e; font-size: 1.1rem;"><i class="fa-brands fa-whatsapp"></i></a>
-                            <a href="#" id="cd-telp-link" style="color: #94a3b8; font-size: 1.1rem;"><i class="fa-solid fa-phone"></i></a>
+                            <a href="#" id="cd-wa-link" target="_blank" style="color: #22c55e; font-size: 1.1rem;"><i
+                                    class="fa-brands fa-whatsapp"></i></a>
+                            <a href="#" id="cd-telp-link" style="color: #94a3b8; font-size: 1.1rem;"><i
+                                    class="fa-solid fa-phone"></i></a>
                         </div>
                     </div>
                     <div class="cd-row">
@@ -2135,7 +2359,8 @@
                             <div class="cd-stat-val" style="color: #3b82f6;">0</div>
                             <div class="cd-stat-label">Deposit <i class="fa-solid fa-circle-info"></i></div>
                         </div>
-                        <div class="cd-stat-box" onclick="alert('Modul Kasbon sedang disiapkan.')" style="border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;">
+                        <div class="cd-stat-box" onclick="alert('Modul Kasbon sedang disiapkan.')"
+                            style="border-left: 1px solid #e2e8f0; border-right: 1px solid #e2e8f0;">
                             <div class="cd-stat-val" style="color: #3b82f6;">0</div>
                             <div class="cd-stat-label">Kasbon <i class="fa-solid fa-circle-info"></i></div>
                         </div>
@@ -2187,13 +2412,15 @@
                 <!-- Data Faktur Card -->
                 <div class="cd-card">
                     <div class="cd-card-title">Data Faktur</div>
-                    <div style="color: #64748b; font-size: 0.9rem; padding-bottom: 5px;">Belum Mempunyai Data Faktur</div>
+                    <div style="color: #64748b; font-size: 0.9rem; padding-bottom: 5px;">Belum Mempunyai Data Faktur
+                    </div>
                 </div>
 
                 <!-- Data Paket Card -->
                 <div class="cd-card">
                     <div class="cd-card-title">Data Paket</div>
-                    <div style="color: #64748b; font-size: 0.9rem; padding-bottom: 5px;" onclick="alert('Modul Paket sedang disiapkan.')">Belum mempunyai paket</div>
+                    <div style="color: #64748b; font-size: 0.9rem; padding-bottom: 5px;"
+                        onclick="alert('Modul Paket sedang disiapkan.')">Belum mempunyai paket</div>
                 </div>
             </div>
 
@@ -2202,23 +2429,28 @@
                 <button class="cd-btn-buat-transaksi" id="cd-btn-buat-trx">BUAT TRANSAKSI</button>
                 <div class="cd-action-bar">
                     <div class="cd-action-btn" id="cd-act-reguler">
-                        <img src="https://cdn-icons-png.flaticon.com/128/9566/9566085.png" alt="Reguler" style="width:28px; height:28px; margin-bottom:5px;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/9566/9566085.png" alt="Reguler"
+                            style="width:28px; height:28px; margin-bottom:5px;">
                         <span>Reguler</span>
                     </div>
                     <div class="cd-action-btn" onclick="alert('Modul Paket sedang disiapkan.')">
-                        <img src="https://cdn-icons-png.flaticon.com/128/9933/9933100.png" alt="Paket" style="width:28px; height:28px; margin-bottom:5px;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/9933/9933100.png" alt="Paket"
+                            style="width:28px; height:28px; margin-bottom:5px;">
                         <span>Paket</span>
                     </div>
                     <div class="cd-action-btn" onclick="alert('Modul TopUp sedang disiapkan.')">
-                        <img src="https://cdn-icons-png.flaticon.com/128/2903/2903674.png" alt="TopUp" style="width:28px; height:28px; margin-bottom:5px;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/2903/2903674.png" alt="TopUp"
+                            style="width:28px; height:28px; margin-bottom:5px;">
                         <span>TopUp</span>
                     </div>
                     <div class="cd-action-btn" onclick="alert('Modul Faktur sedang disiapkan.')">
-                        <img src="https://cdn-icons-png.flaticon.com/128/1198/1198363.png" alt="Faktur" style="width:28px; height:28px; margin-bottom:5px;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/1198/1198363.png" alt="Faktur"
+                            style="width:28px; height:28px; margin-bottom:5px;">
                         <span>Faktur</span>
                     </div>
                     <div class="cd-action-btn" id="cd-act-produk">
-                        <img src="https://cdn-icons-png.flaticon.com/128/3081/3081648.png" alt="Produk" style="width:28px; height:28px; margin-bottom:5px;">
+                        <img src="https://cdn-icons-png.flaticon.com/128/3081/3081648.png" alt="Produk"
+                            style="width:28px; height:28px; margin-bottom:5px;">
                         <span>Produk</span>
                     </div>
                 </div>
@@ -2226,9 +2458,12 @@
         </div>
 
         <!-- LAYOUT DETAIL TRANSAKSI -->
-        <div id="layout-detail-trx" class="layout" style="display: none; background: #f8fafc; min-height: 100vh; position: relative; padding-bottom: 80px;">
-            <header style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10;">
-                <button class="btn-icon" id="btn-back-detail-trx" style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
+        <div id="layout-detail-trx" class="layout"
+            style="display: none; background: #f8fafc; min-height: 100vh; position: relative; padding-bottom: 80px;">
+            <header
+                style="display: flex; align-items: center; justify-content: space-between; padding: 15px 20px; background: #ffffff; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10;">
+                <button class="btn-icon" id="btn-back-detail-trx"
+                    style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div style="flex-grow: 1; text-align: center;">
@@ -2241,25 +2476,34 @@
             </header>
 
             <div style="padding: 20px;">
-                <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
-                    <div id="dt-status-title" style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px;">Selesai</div>
-                    
-                    <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
+                    <div id="dt-status-title"
+                        style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px;">Selesai</div>
+
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
                         <div>
-                            <div id="dt-trx-id" style="font-weight: 600; color: #1e293b; margin-bottom: 5px;">TRX/2608/120</div>
+                            <div id="dt-trx-id" style="font-weight: 600; color: #1e293b; margin-bottom: 5px;">
+                                TRX/2608/120</div>
                             <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px;">
-                                <div style="width: 40px; height: 40px; border-radius: 50%; background: #3b82f6; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
+                                <div
+                                    style="width: 40px; height: 40px; border-radius: 50%; background: #3b82f6; color: #ffffff; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">
                                     <i class="fa-solid fa-user"></i>
                                 </div>
                                 <div>
-                                    <div id="dt-cust-name" style="font-weight: 500; color: #1e293b; font-size: 0.95rem;">Nama Pelanggan</div>
+                                    <div id="dt-cust-name"
+                                        style="font-weight: 500; color: #1e293b; font-size: 0.95rem;">Nama Pelanggan
+                                    </div>
                                     <div id="dt-cust-phone" style="color: #64748b; font-size: 0.8rem;">Tanpa nomor</div>
                                 </div>
                             </div>
                         </div>
                         <div style="text-align: right;">
-                            <div id="dt-trx-date" style="color: #64748b; font-size: 0.8rem; margin-bottom: 10px;">18/08/2026 09:04:14</div>
-                            <div style="display: flex; gap: 10px; justify-content: flex-end; color: #cbd5e1; font-size: 1.1rem;">
+                            <div id="dt-trx-date" style="color: #64748b; font-size: 0.8rem; margin-bottom: 10px;">
+                                18/08/2026 09:04:14</div>
+                            <div
+                                style="display: flex; gap: 10px; justify-content: flex-end; color: #cbd5e1; font-size: 1.1rem;">
                                 <i class="fa-brands fa-whatsapp" style="color: #22c55e;"></i>
                                 <i class="fa-solid fa-phone"></i>
                             </div>
@@ -2267,19 +2511,23 @@
                     </div>
                 </div>
 
-                <div style="background: #ffffff; border-radius: 12px; padding: 15px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 15px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-weight: 600; color: #1e293b;">Informasi Antar/Jemput</div>
                     <i class="fa-solid fa-chevron-down" style="color: #64748b;"></i>
                 </div>
 
-                <div style="background: #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; color: #ffffff; display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="background: #3b82f6; border-radius: 12px; padding: 20px; margin-bottom: 15px; color: #ffffff; display: flex; justify-content: space-between; align-items: center;">
                     <div>
                         <div style="font-size: 0.85rem; opacity: 0.9; margin-bottom: 5px;">Tagihan</div>
                         <div id="dt-tagihan" style="font-size: 1.4rem; font-weight: 700;">18,500</div>
                     </div>
                     <div style="display: flex; gap: 10px;">
-                        <button id="btn-dt-tagihan-detail" style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #ffffff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">DETAIL</button>
-                        <button id="dt-btn-bayar" style="background: #f59e0b; border: none; color: #ffffff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">BAYAR</button>
+                        <button id="btn-dt-tagihan-detail"
+                            style="background: transparent; border: 1px solid rgba(255,255,255,0.3); color: #ffffff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600; cursor: pointer;">DETAIL</button>
+                        <button id="dt-btn-bayar"
+                            style="background: #f59e0b; border: none; color: #ffffff; padding: 5px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;">BAYAR</button>
                     </div>
                 </div>
 
@@ -2288,45 +2536,56 @@
                     <div id="dt-est-selesai" style="font-weight: 600; color: #1e293b;">19/08/2026 09:04:14</div>
                 </div>
 
-                <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
                     <div style="font-weight: 600; color: #1e293b; margin-bottom: 10px;">Detail Pesanan</div>
-                    <div id="dt-parfum-name" style="font-size: 0.8rem; color: #64748b; margin-bottom: 15px;">Pilih Parfum <span style="color: #3b82f6;">-</span></div>
-                    
+                    <div id="dt-parfum-name" style="font-size: 0.8rem; color: #64748b; margin-bottom: 15px;">Pilih
+                        Parfum <span style="color: #3b82f6;">-</span></div>
+
                     <div id="dt-item-list" style="display: flex; flex-direction: column; gap: 15px;">
                         <!-- Items rendered here -->
                     </div>
                 </div>
 
-                <div style="background: #ffffff; border-radius: 12px; padding: 15px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 15px 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <div style="font-weight: 600; color: #1e293b;">Produk Tambahan</div>
                     <i class="fa-solid fa-chevron-down" style="color: #64748b;"></i>
                 </div>
 
-                <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
                     <div style="font-weight: 600; color: #1e293b; margin-bottom: 10px;">Informasi Tambahan</div>
                     <div id="dt-catatan" style="font-size: 0.85rem; color: #64748b;">Tidak Ada</div>
                 </div>
 
-                <div style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
-                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                <div
+                    style="background: #ffffff; border-radius: 12px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); margin-bottom: 15px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                         <div style="font-weight: 600; color: #1e293b;">Histori Pesanan</div>
                         <i class="fa-solid fa-chevron-up" style="color: #64748b;"></i>
                     </div>
-                    <div id="dt-history-list" style="display: flex; flex-direction: column; gap: 15px; font-size: 0.85rem;">
+                    <div id="dt-history-list"
+                        style="display: flex; flex-direction: column; gap: 15px; font-size: 0.85rem;">
                         <!-- History rendered here -->
                     </div>
                 </div>
             </div>
 
-            <div style="position: fixed; bottom: 0; left: 0; right: 0; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 15px 20px; border-top: 1px solid #e2e8f0; z-index: 10;">
-                <button id="dt-btn-batal" style="width: 100%; padding: 15px; border-radius: 12px; background: transparent; border: 1px solid #ef4444; color: #ef4444; font-weight: 600; font-size: 1rem; cursor: pointer;">BATAL</button>
+            <div
+                style="position: fixed; bottom: 0; left: 0; right: 0; max-width: 600px; margin: 0 auto; background: #ffffff; padding: 15px 20px; border-top: 1px solid #e2e8f0; z-index: 10;">
+                <button id="dt-btn-batal"
+                    style="width: 100%; padding: 15px; border-radius: 12px; background: transparent; border: 1px solid #ef4444; color: #ef4444; font-weight: 600; font-size: 1rem; cursor: pointer;">BATAL</button>
             </div>
         </div>
 
         <!-- LAYOUT RIWAYAT PELANGGAN -->
-        <div id="layout-riwayat-pelanggan" class="layout" style="display: none; background: #ffffff; min-height: 100vh; position: relative; padding-bottom: 80px;">
+        <div id="layout-riwayat-pelanggan" class="layout"
+            style="display: none; background: #ffffff; min-height: 100vh; position: relative; padding-bottom: 80px;">
             <header style="display: flex; align-items: center; padding: 15px 20px; border-bottom: 1px solid #e2e8f0;">
-                <button class="btn-icon" id="btn-back-riwayat" style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
+                <button class="btn-icon" id="btn-back-riwayat"
+                    style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div style="flex-grow: 1; text-align: center;">
@@ -2336,25 +2595,34 @@
             </header>
             <div style="padding: 20px; display: flex; justify-content: space-between; align-items: center;">
                 <h2 style="margin: 0; font-size: 1.5rem; color: #1e293b; font-weight: 600;">Detail Transaksi</h2>
-                <button id="btn-toggle-faktur-mode" style="padding: 8px 15px; border-radius: 8px; background: #0ea5e9; color: white; border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 6px rgba(14,165,233,0.2); display: flex; align-items: center; gap: 6px;">
+                <button id="btn-toggle-faktur-mode"
+                    style="padding: 8px 15px; border-radius: 8px; background: #0ea5e9; color: white; border: none; font-weight: 600; font-size: 0.85rem; cursor: pointer; box-shadow: 0 4px 6px rgba(14,165,233,0.2); display: flex; align-items: center; gap: 6px;">
                     <i class="fa-solid fa-file-invoice"></i> Buat Faktur
                 </button>
             </div>
             <div style="display: flex; border-bottom: 1px solid #e2e8f0;">
-                <div id="tab-riwayat-reguler" class="riwayat-tab active" style="flex: 1; text-align: center; padding: 15px 0; font-weight: 600; color: #0284c7; border-bottom: 2px solid #0284c7; cursor: pointer; font-size: 0.9rem;">REGULER</div>
-                <div id="tab-riwayat-produk" class="riwayat-tab" style="flex: 1; text-align: center; padding: 15px 0; font-weight: 600; color: #64748b; border-bottom: 2px solid transparent; cursor: pointer; font-size: 0.9rem;">PRODUK</div>
+                <div id="tab-riwayat-reguler" class="riwayat-tab active"
+                    style="flex: 1; text-align: center; padding: 15px 0; font-weight: 600; color: #0284c7; border-bottom: 2px solid #0284c7; cursor: pointer; font-size: 0.9rem;">
+                    REGULER</div>
+                <div id="tab-riwayat-produk" class="riwayat-tab"
+                    style="flex: 1; text-align: center; padding: 15px 0; font-weight: 600; color: #64748b; border-bottom: 2px solid transparent; cursor: pointer; font-size: 0.9rem;">
+                    PRODUK</div>
             </div>
             <div id="riwayat-trx-list" style="padding: 15px 20px; display: flex; flex-direction: column; gap: 15px;">
                 <!-- List dynamically populated here -->
             </div>
-            
+
             <!-- Floating Bottom Bar for Faktur Selection -->
-            <div id="faktur-bottom-bar" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); justify-content: space-between; align-items: center; z-index: 1000; border-top-left-radius: 20px; border-top-right-radius: 20px; max-width: 480px; margin: 0 auto;">
+            <div id="faktur-bottom-bar"
+                style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: white; padding: 15px 20px; box-shadow: 0 -4px 10px rgba(0,0,0,0.05); justify-content: space-between; align-items: center; z-index: 1000; border-top-left-radius: 20px; border-top-right-radius: 20px; max-width: 480px; margin: 0 auto;">
                 <div>
-                    <div style="font-size: 0.8rem; color: #64748b;">Terpilih: <span id="faktur-selected-count" style="font-weight: 700; color: #0ea5e9;">0</span></div>
-                    <div id="faktur-selected-total" style="font-weight: 700; font-size: 1.2rem; color: #1e293b;">Rp 0</div>
+                    <div style="font-size: 0.8rem; color: #64748b;">Terpilih: <span id="faktur-selected-count"
+                            style="font-weight: 700; color: #0ea5e9;">0</span></div>
+                    <div id="faktur-selected-total" style="font-weight: 700; font-size: 1.2rem; color: #1e293b;">Rp 0
+                    </div>
                 </div>
-                <button id="btn-generate-faktur" style="background: #0ea5e9; color: white; padding: 12px 20px; border-radius: 12px; border: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                <button id="btn-generate-faktur"
+                    style="background: #0ea5e9; color: white; padding: 12px 20px; border-radius: 12px; border: none; font-weight: 600; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; gap: 8px;">
                     Lanjut Faktur <i class="fa-solid fa-arrow-right"></i>
                 </button>
             </div>
@@ -2362,8 +2630,10 @@
 
         <!-- LAYOUT FAKTUR / INVOICE -->
         <div id="layout-faktur" class="layout" style="display: none; background: #f8fafc; min-height: 100vh;">
-            <header style="display: flex; align-items: center; padding: 15px 20px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10;">
-                <button class="btn-icon" id="btn-back-faktur" style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
+            <header
+                style="display: flex; align-items: center; padding: 15px 20px; background: white; border-bottom: 1px solid #e2e8f0; position: sticky; top: 0; z-index: 10;">
+                <button class="btn-icon" id="btn-back-faktur"
+                    style="color: #64748b; font-size: 1.2rem; cursor: pointer; border: none; background: transparent;">
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div style="flex-grow: 1; text-align: center;">
@@ -2371,35 +2641,44 @@
                 </div>
                 <div style="width: 24px;"></div>
             </header>
-            
-            <div id="faktur-print-area" style="padding: 20px; background: white; margin: 15px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
-                <div style="text-align: center; border-bottom: 2px dashed #e2e8f0; padding-bottom: 15px; margin-bottom: 15px;">
-                    <img src="logo_manjur.png" alt="Logo" class="dynamic-logo" style="height: 40px; margin-bottom: 10px;">
+
+            <div id="faktur-print-area"
+                style="padding: 20px; background: white; margin: 15px; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.02);">
+                <div
+                    style="text-align: center; border-bottom: 2px dashed #e2e8f0; padding-bottom: 15px; margin-bottom: 15px;">
+                    <img src="logo_manjur.png" alt="Logo" class="dynamic-logo"
+                        style="height: 40px; margin-bottom: 10px;">
                     <h3 style="margin: 0; color: #1e293b; font-size: 1.2rem;">INVOICE TAGIHAN</h3>
-                    <p id="faktur-date-display" style="margin: 5px 0 0; color: #64748b; font-size: 0.85rem;">Tanggal: -</p>
+                    <p id="faktur-date-display" style="margin: 5px 0 0; color: #64748b; font-size: 0.85rem;">Tanggal: -
+                    </p>
                 </div>
-                
+
                 <div style="margin-bottom: 20px;">
                     <p style="margin: 0 0 5px; color: #64748b; font-size: 0.85rem;">Kepada Yth,</p>
                     <h4 id="faktur-cust-name" style="margin: 0 0 3px; color: #1e293b; font-size: 1.1rem;">-</h4>
                     <p id="faktur-cust-phone" style="margin: 0; color: #64748b; font-size: 0.9rem;">-</p>
                 </div>
-                
-                <div id="faktur-items-container" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
+
+                <div id="faktur-items-container"
+                    style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px;">
                     <!-- Items -->
                 </div>
-                
-                <div style="border-top: 2px dashed #e2e8f0; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
+
+                <div
+                    style="border-top: 2px dashed #e2e8f0; padding-top: 15px; display: flex; justify-content: space-between; align-items: center;">
                     <span style="font-weight: 600; color: #1e293b;">TOTAL KESELURUHAN</span>
-                    <span id="faktur-grand-total" style="font-weight: 700; font-size: 1.3rem; color: #0ea5e9;">Rp 0</span>
+                    <span id="faktur-grand-total" style="font-weight: 700; font-size: 1.3rem; color: #0ea5e9;">Rp
+                        0</span>
                 </div>
             </div>
-            
+
             <div style="padding: 0 15px 30px; display: flex; gap: 10px;">
-                <button id="btn-share-faktur" style="flex: 1; background: #22c55e; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                <button id="btn-share-faktur"
+                    style="flex: 1; background: #22c55e; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
                     <i class="fa-brands fa-whatsapp"></i> Bagikan WA
                 </button>
-                <button id="btn-print-faktur" style="flex: 1; background: #1e293b; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
+                <button id="btn-print-faktur"
+                    style="flex: 1; background: #1e293b; color: white; border: none; padding: 14px; border-radius: 12px; font-weight: 600; cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;">
                     <i class="fa-solid fa-print"></i> Cetak
                 </button>
             </div>
@@ -2423,12 +2702,12 @@
             <div class="pos-2step-container">
                 <!-- STEP 1: INPUT TRANSAKSI -->
                 <div class="pos-step-card">
-                      <h3 class="pos-step-title"><span>DIKERJAKAN OLEH <span style="color:#ef4444">*</span></span></h3>
-                      <div style="margin-bottom: 25px;">
-                          <select class="form-select" id="pos-pegawai-select" style="width: 100%;">
-                              <option value="">-- Pilih Pegawai --</option>
-                          </select>
-                      </div>
+                    <h3 class="pos-step-title"><span>DIKERJAKAN OLEH <span style="color:#ef4444">*</span></span></h3>
+                    <div style="margin-bottom: 25px;">
+                        <select class="form-select" id="pos-pegawai-select" style="width: 100%;">
+                            <option value="">-- Pilih Pegawai --</option>
+                        </select>
+                    </div>
 
                     <h3 class="pos-step-title"><span>1. PILIH PELANGGAN <span style="color:#ef4444">*</span></span></h3>
                     <div style="display:flex; gap:10px; margin-bottom: 10px;">
@@ -2604,7 +2883,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-arus" style="color: #0ea5e9;">
@@ -2615,14 +2895,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Arus Keuangan
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: center; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="arus-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -2639,9 +2922,11 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="arus-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Hari Ini</div>
+                        <div id="arus-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Hari Ini
+                        </div>
                     </div>
-                    <button id="btn-refresh-arus" style="border: 1px solid #94a3b8; background: transparent; color: #3b82f6; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
+                    <button id="btn-refresh-arus"
+                        style="border: 1px solid #94a3b8; background: transparent; color: #3b82f6; padding: 6px 16px; border-radius: 20px; font-size: 0.8rem; font-weight: 500; cursor: pointer; transition: all 0.2s;">
                         Refresh
                     </button>
                 </div>
@@ -2652,7 +2937,8 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
 
@@ -2768,8 +3054,10 @@
             </div>
 
             <!-- FIXED BOTTOM BAR (NEW) -->
-            <div id="arus-fixed-bottom" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; display: flex; justify-content: center; align-items: center; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 100; border-top: 1px solid #f1f5f9; box-sizing: border-box;">
-                <button id="btn-analisa-arus" style="background: #f59e0b; color: white; border: none; padding: 10px 24px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
+            <div id="arus-fixed-bottom"
+                style="position: fixed; bottom: 0; left: 0; width: 100%; background: #ffffff; padding: 15px 20px; display: flex; justify-content: center; align-items: center; box-shadow: 0 -4px 20px rgba(0,0,0,0.05); z-index: 100; border-top: 1px solid #f1f5f9; box-sizing: border-box;">
+                <button id="btn-analisa-arus"
+                    style="background: #f59e0b; color: white; border: none; padding: 10px 24px; border-radius: 20px; font-weight: 600; font-size: 0.9rem; cursor: pointer; box-shadow: 0 4px 10px rgba(245, 158, 11, 0.3);">
                     Analisa Arus Kas
                 </button>
                 <div style="position: absolute; right: 20px; color:#334155; font-size:0.9rem;">
@@ -2777,7 +3065,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- LAYOUT DETAIL RINGKASAN -->
         <div id="layout-detail-ringkasan" class="layout"
             style="display: none; background: #ffffff; min-height: 100vh; position:relative;">
@@ -2786,14 +3074,17 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <div id="detail-ringkasan-title" style="font-weight: 600; font-size: 1.1rem; color: #1e293b;">Detail Data</div>
+                    <div id="detail-ringkasan-title" style="font-weight: 600; font-size: 1.1rem; color: #1e293b;">Detail
+                        Data</div>
                 </div>
-                <button class="btn-icon" id="btn-export-excel-detail" style="color: #10b981; font-size:1.2rem; cursor:pointer;" title="Export Excel">
+                <button class="btn-icon" id="btn-export-excel-detail"
+                    style="color: #10b981; font-size:1.2rem; cursor:pointer;" title="Export Excel">
                     <i class="fa-solid fa-file-excel"></i>
                 </button>
             </header>
             <div style="padding: 15px 20px;">
-                <div id="detail-ringkasan-empty" style="display:none; text-align:center; margin-top:50px; color:#94a3b8; font-size:0.9rem;">
+                <div id="detail-ringkasan-empty"
+                    style="display:none; text-align:center; margin-top:50px; color:#94a3b8; font-size:0.9rem;">
                     <i class="fa-solid fa-folder-open" style="font-size:2rem; margin-bottom:10px;"></i><br>
                     Data tidak ditemukan
                 </div>
@@ -2811,7 +3102,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-pendapatan" style="color: #0ea5e9;">
@@ -2822,14 +3114,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Pendapatan Transaksi
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="pendapatan-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -2845,7 +3140,8 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="pendapatan-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih Tanggal</div>
+                        <div id="pendapatan-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih
+                            Tanggal</div>
                     </div>
                 </div>
             </div>
@@ -2855,7 +3151,8 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
 
@@ -2885,9 +3182,14 @@
                     </div>
                 </div>
 
-                <div style="display:flex; gap:10px; margin-bottom:15px; margin-top:15px; padding: 0 20px; justify-content: flex-end;">
-                    <button id="btn-pendapatan-expand-all" style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-down"></i> Buka Semua</button>
-                    <button id="btn-pendapatan-collapse-all" style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-up"></i> Tutup Semua</button>
+                <div
+                    style="display:flex; gap:10px; margin-bottom:15px; margin-top:15px; padding: 0 20px; justify-content: flex-end;">
+                    <button id="btn-pendapatan-expand-all"
+                        style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                            class="fa-solid fa-angle-down"></i> Buka Semua</button>
+                    <button id="btn-pendapatan-collapse-all"
+                        style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                            class="fa-solid fa-angle-up"></i> Tutup Semua</button>
                 </div>
 
                 <!-- Accordion List Container -->
@@ -2905,7 +3207,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-lainnya" style="color: #0ea5e9;">
@@ -2916,14 +3219,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Pendapatan Lainnya
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="lainnya-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -2939,7 +3245,8 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="lainnya-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih Tanggal</div>
+                        <div id="lainnya-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih
+                            Tanggal</div>
                     </div>
                 </div>
             </div>
@@ -2949,7 +3256,8 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
 
@@ -3013,7 +3321,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-omzet" style="color: #0ea5e9;">
@@ -3024,14 +3333,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Omzet
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-end; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:5px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#3b82f6; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#3b82f6; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days"></i>
                             <select id="omzet-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:#1e293b; padding-right:15px; cursor:pointer; outline:none;">
@@ -3047,9 +3359,11 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none; color:#1e293b;"></i>
                         </div>
-                        <div id="omzet-date-text" style="font-size:0.75rem; color:#64748b; margin-left:0;">Pilih Tanggal</div>
+                        <div id="omzet-date-text" style="font-size:0.75rem; color:#64748b; margin-left:0;">Pilih Tanggal
+                        </div>
                     </div>
-                    <button id="btn-refresh-omzet" style="background:#ffffff; border:1px solid #cbd5e1; color:#3b82f6; font-size:0.8rem; font-weight:500; padding:6px 15px; border-radius:20px; cursor:pointer; display:flex; align-items:center; gap:5px;">
+                    <button id="btn-refresh-omzet"
+                        style="background:#ffffff; border:1px solid #cbd5e1; color:#3b82f6; font-size:0.8rem; font-weight:500; padding:6px 15px; border-radius:20px; cursor:pointer; display:flex; align-items:center; gap:5px;">
                         Refresh
                     </button>
                 </div>
@@ -3060,7 +3374,8 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
 
@@ -3068,60 +3383,67 @@
             <div id="omzet-data-state" style="display:none; flex-direction:column; width:100%;">
                 <div style="padding: 15px 20px;">
 
-                <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:10px;">
-                    <div>
-                        <div style="color:#f59e0b; font-weight:600; font-size:0.95rem; margin-bottom:5px;">Total Omzet</div>
-                        <div style="display:flex; align-items:flex-start; gap:5px; color:#1e293b;">
-                            <span style="font-size:0.9rem; font-weight:600; margin-top:3px;">Rp</span>
-                            <span id="omzet-total-nominal" style="font-size:1.8rem; font-weight:700;">0</span>
+                    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-top:10px;">
+                        <div>
+                            <div style="color:#f59e0b; font-weight:600; font-size:0.95rem; margin-bottom:5px;">Total
+                                Omzet</div>
+                            <div style="display:flex; align-items:flex-start; gap:5px; color:#1e293b;">
+                                <span style="font-size:0.9rem; font-weight:600; margin-top:3px;">Rp</span>
+                                <span id="omzet-total-nominal" style="font-size:1.8rem; font-weight:700;">0</span>
+                            </div>
+                        </div>
+                        <div
+                            style="font-size:0.8rem; color:#334155; font-weight:500; display:flex; align-items:center; gap:5px; cursor:pointer;">
+                            Filter : Semua <i class="fa-solid fa-caret-down"></i>
                         </div>
                     </div>
-                    <div style="font-size:0.8rem; color:#334155; font-weight:500; display:flex; align-items:center; gap:5px; cursor:pointer;">
-                        Filter : Semua <i class="fa-solid fa-caret-down"></i>
+
+                    <!-- Chart Container -->
+                    <div style="margin-top:20px; height:220px; width:100%; position:relative;">
+                        <canvas id="omzetChart"></canvas>
                     </div>
                 </div>
 
-                <!-- Chart Container -->
-                <div style="margin-top:20px; height:220px; width:100%; position:relative;">
-                    <canvas id="omzetChart"></canvas>
-                </div>
-            </div>
+                <div style="background:#f8fafc; height:10px; width:100%;"></div>
 
-            <div style="background:#f8fafc; height:10px; width:100%;"></div>
-
-            <div style="padding: 20px; padding-bottom: 80px;">
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
-                    <h3 style="color:#f59e0b; font-weight:600; font-size:1.1rem;">Rincian</h3>
-                    <div
-                        style="display:flex; background:#ffffff; border-radius:20px; border:1px solid #3b82f6; overflow:hidden;">
-                        <button id="btn-toggle-perjam"
-                            style="padding:6px 15px; border:none; background:#ffffff; color:#3b82f6; font-size:0.75rem; font-weight:500; border-radius:20px; cursor:pointer; transition:all 0.2s;">Per Jam</button>
-                        <button id="btn-toggle-pertanggal"
-                            style="padding:6px 15px; border:none; background:#3b82f6; color:#ffffff; font-size:0.75rem; font-weight:500; border-radius:20px; cursor:pointer; transition:all 0.2s;">Per Tanggal</button>
+                <div style="padding: 20px; padding-bottom: 80px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 20px;">
+                        <h3 style="color:#f59e0b; font-weight:600; font-size:1.1rem;">Rincian</h3>
+                        <div
+                            style="display:flex; background:#ffffff; border-radius:20px; border:1px solid #3b82f6; overflow:hidden;">
+                            <button id="btn-toggle-perjam"
+                                style="padding:6px 15px; border:none; background:#ffffff; color:#3b82f6; font-size:0.75rem; font-weight:500; border-radius:20px; cursor:pointer; transition:all 0.2s;">Per
+                                Jam</button>
+                            <button id="btn-toggle-pertanggal"
+                                style="padding:6px 15px; border:none; background:#3b82f6; color:#ffffff; font-size:0.75rem; font-weight:500; border-radius:20px; cursor:pointer; transition:all 0.2s;">Per
+                                Tanggal</button>
+                        </div>
                     </div>
+
+                    <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
+                        <thead>
+                            <tr style="color:#1e293b; text-align:left;">
+                                <th id="omzet-th-waktu" style="font-weight:600; padding-bottom:15px;">Tanggal</th>
+                                <th style="font-weight:600; padding-bottom:15px; text-align:center;">Total Transaksi
+                                </th>
+                                <th style="font-weight:600; padding-bottom:15px; text-align:right;">Total Nominal</th>
+                            </tr>
+                        </thead>
+                        <tbody id="omzet-tbody" style="color:#334155;">
+                            <!-- Dynamically populated -->
+                        </tbody>
+                    </table>
+                    <div style="height:100px;"></div>
                 </div>
 
-                <table style="width:100%; border-collapse:collapse; font-size:0.85rem;">
-                    <thead>
-                        <tr style="color:#1e293b; text-align:left;">
-                            <th id="omzet-th-waktu" style="font-weight:600; padding-bottom:15px;">Tanggal</th>
-                            <th style="font-weight:600; padding-bottom:15px; text-align:center;">Total Transaksi</th>
-                            <th style="font-weight:600; padding-bottom:15px; text-align:right;">Total Nominal</th>
-                        </tr>
-                    </thead>
-                    <tbody id="omzet-tbody" style="color:#334155;">
-                        <!-- Dynamically populated -->
-                    </tbody>
-                </table>
-                <div style="height:100px;"></div>
-            </div>
-
-            <!-- Analisa Omzet Floating Button -->
-            <div style="position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; pointer-events: none; z-index: 999;">
-                <button style="background: #f59e0b; color: #ffffff; font-weight: 600; font-size: 0.95rem; padding: 12px 30px; border: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 8px;">
-                    Analisa Omzet
-                </button>
-            </div>
+                <!-- Analisa Omzet Floating Button -->
+                <div
+                    style="position: fixed; bottom: 30px; left: 0; width: 100%; display: flex; justify-content: center; pointer-events: none; z-index: 999;">
+                    <button
+                        style="background: #f59e0b; color: #ffffff; font-weight: 600; font-size: 0.95rem; padding: 12px 30px; border: none; border-radius: 30px; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4); pointer-events: auto; cursor: pointer; display: flex; align-items: center; gap: 8px;">
+                        Analisa Omzet
+                    </button>
+                </div>
             </div>
         </div>
 
@@ -3133,7 +3455,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-pengeluaran" style="color: #0ea5e9;">
@@ -3144,14 +3467,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Pengeluaran
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="pengeluaran-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -3167,7 +3493,8 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="pengeluaran-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih Tanggal</div>
+                        <div id="pengeluaran-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">
+                            Pilih Tanggal</div>
                     </div>
                 </div>
             </div>
@@ -3177,68 +3504,72 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
 
-                <!-- DATA STATE (GROUPED LIST) -->
-                <div id="pengeluaran-data-state"
-                    style="display:none; flex-direction:column; padding-bottom:100px; background:#ffffff;">
+            <!-- DATA STATE (GROUPED LIST) -->
+            <div id="pengeluaran-data-state"
+                style="display:none; flex-direction:column; padding-bottom:100px; background:#ffffff;">
 
-                    <!-- Tabs -->
-                    <div
-                        style="display:flex; justify-content:center; border-bottom:1px solid #f1f5f9; padding: 0 20px;">
-                        <div style="display:flex; width:100%; max-width:350px;">
-                            <button id="btn-tab-pengeluaran-transaksi"
-                                style="flex:1; background:transparent; border:none; padding:15px 10px; color:#0ea5e9; font-weight:500; font-size:0.95rem; border-bottom:2px solid #0ea5e9; cursor:pointer; transition:all 0.3s;">Transaksi</button>
-                            <button id="btn-tab-pengeluaran-kategori"
-                                style="flex:1; background:transparent; border:none; padding:15px 10px; color:#64748b; font-weight:500; font-size:0.95rem; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.3s;">Kategori</button>
-                        </div>
+                <!-- Tabs -->
+                <div style="display:flex; justify-content:center; border-bottom:1px solid #f1f5f9; padding: 0 20px;">
+                    <div style="display:flex; width:100%; max-width:350px;">
+                        <button id="btn-tab-pengeluaran-transaksi"
+                            style="flex:1; background:transparent; border:none; padding:15px 10px; color:#0ea5e9; font-weight:500; font-size:0.95rem; border-bottom:2px solid #0ea5e9; cursor:pointer; transition:all 0.3s;">Transaksi</button>
+                        <button id="btn-tab-pengeluaran-kategori"
+                            style="flex:1; background:transparent; border:none; padding:15px 10px; color:#64748b; font-weight:500; font-size:0.95rem; border-bottom:2px solid transparent; cursor:pointer; transition:all 0.3s;">Kategori</button>
                     </div>
+                </div>
 
-                    <!-- CONTENT TRANSAKSI -->
-                    <div id="pengeluaran-content-transaksi" style="display:block;">
-                        <!-- Summary Section -->
-                        <div style="padding: 20px 20px 10px; border-bottom:1px solid #f1f5f9;">
-                            <div style="color:#eab308; font-weight:500; font-size:1.1rem; margin-bottom:8px;">Total
-                                Pengeluaran</div>
-                            <div style="display:flex; justify-content:space-between; align-items:flex-end;">
-                                <div style="color:#1e293b; font-weight:600; font-size:1rem;">Rp <span
-                                        style="font-size:1.8rem; font-weight:700;">0</span></div>
-                                <div
-                                    style="font-size:0.9rem; color:#1e293b; display:flex; align-items:center; gap:8px; position:relative; margin-bottom:8px;">
-                                    Cashbox : <span id="pengeluaran-cashbox-text">Semua</span> <i
-                                        class="fa-solid fa-caret-down"></i>
-                                    <select id="pengeluaran-cashbox-filter"
-                                        style="position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; cursor:pointer;">
-                                        <option value="Semua">Semua</option>
-                                        <option value="Tunai">Tunai</option>
-                                        <option value="QRIS">QRIS</option>
-                                        <option value="Mandiri">Mandiri</option>
-                                    </select>
-                                </div>
+                <!-- CONTENT TRANSAKSI -->
+                <div id="pengeluaran-content-transaksi" style="display:block;">
+                    <!-- Summary Section -->
+                    <div style="padding: 20px 20px 10px; border-bottom:1px solid #f1f5f9;">
+                        <div style="color:#eab308; font-weight:500; font-size:1.1rem; margin-bottom:8px;">Total
+                            Pengeluaran</div>
+                        <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                            <div style="color:#1e293b; font-weight:600; font-size:1rem;">Rp <span
+                                    style="font-size:1.8rem; font-weight:700;">0</span></div>
+                            <div
+                                style="font-size:0.9rem; color:#1e293b; display:flex; align-items:center; gap:8px; position:relative; margin-bottom:8px;">
+                                Cashbox : <span id="pengeluaran-cashbox-text">Semua</span> <i
+                                    class="fa-solid fa-caret-down"></i>
+                                <select id="pengeluaran-cashbox-filter"
+                                    style="position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; cursor:pointer;">
+                                    <option value="Semua">Semua</option>
+                                    <option value="Tunai">Tunai</option>
+                                    <option value="QRIS">QRIS</option>
+                                    <option value="Mandiri">Mandiri</option>
+                                </select>
                             </div>
                         </div>
-
-                        <div style="display:flex; gap:10px; margin-bottom:15px; margin-top:15px; padding: 0 20px; justify-content: flex-end;">
-                            <button id="btn-pengeluaran-expand-all" style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-down"></i> Buka Semua</button>
-                            <button id="btn-pengeluaran-collapse-all" style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-up"></i> Tutup Semua</button>
-                        </div>
-
-                        <!-- Accordion List Container -->
-                        <div id="pengeluaran-accordion-container" style="display:flex; flex-direction:column;">
-                            <!-- Data will be injected here via JS -->
-                        </div>
                     </div>
 
-                    <!-- CONTENT KATEGORI -->
-                    <div id="pengeluaran-content-kategori" style="display:none; padding: 40px 20px; text-align:center;">
-                        <i class="fa-solid fa-chart-pie"
-                            style="font-size: 3rem; color: #cbd5e1; margin-bottom:15px;"></i>
-                        <div style="color:#64748b; font-size:0.9rem;">Belum ada data kategori untuk periode ini.</div>
+                    <div
+                        style="display:flex; gap:10px; margin-bottom:15px; margin-top:15px; padding: 0 20px; justify-content: flex-end;">
+                        <button id="btn-pengeluaran-expand-all"
+                            style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                                class="fa-solid fa-angle-down"></i> Buka Semua</button>
+                        <button id="btn-pengeluaran-collapse-all"
+                            style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                                class="fa-solid fa-angle-up"></i> Tutup Semua</button>
+                    </div>
+
+                    <!-- Accordion List Container -->
+                    <div id="pengeluaran-accordion-container" style="display:flex; flex-direction:column;">
+                        <!-- Data will be injected here via JS -->
                     </div>
                 </div>
+
+                <!-- CONTENT KATEGORI -->
+                <div id="pengeluaran-content-kategori" style="display:none; padding: 40px 20px; text-align:center;">
+                    <i class="fa-solid fa-chart-pie" style="font-size: 3rem; color: #cbd5e1; margin-bottom:15px;"></i>
+                    <div style="color:#64748b; font-size:0.9rem;">Belum ada data kategori untuk periode ini.</div>
+                </div>
             </div>
+        </div>
 
         <div id="layout-hutang" class="layout"
             style="display: none; background: #f8fafc; min-height: 100vh; position:relative;">
@@ -3413,7 +3744,8 @@
 
             <!-- Tambahan tombol cetak besar di bawah detail pesanan -->
             <div style="padding: 20px;">
-                <button class="btn-pos btn-pos-cetak" style="width: 100%; border-radius: 12px; margin-bottom: 20px; background: #3b82f6; border: none; color: white;"
+                <button class="btn-pos btn-pos-cetak"
+                    style="width: 100%; border-radius: 12px; margin-bottom: 20px; background: #3b82f6; border: none; color: white;"
                     id="btn-dp-cetak-nota-besar">
                     <i class="fa-solid fa-receipt"></i> LIHAT STRUK NOTA
                 </button>
@@ -3421,7 +3753,8 @@
         </div>
 
         <!-- LAYOUT NOTA DIGITAL (THERMAL) -->
-        <div id="layout-nota" class="layout" style="display: none; background: #f8fafc; z-index: 9999; height: 100vh; width: 100%; position: fixed; top: 0; left: 0; overflow-y: auto; padding-bottom: 50px;">
+        <div id="layout-nota" class="layout"
+            style="display: none; background: #f8fafc; z-index: 9999; height: 100vh; width: 100%; position: fixed; top: 0; left: 0; overflow-y: auto; padding-bottom: 50px;">
             <header class="pos-header" style="background: #2563eb; color: #fff;">
                 <button class="btn-icon" id="btn-back-nota" style="color: #fff;">
                     <i class="fa-solid fa-arrow-left"></i>
@@ -3540,7 +3873,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-lap-transaksi" style="color: #0ea5e9;">
@@ -3551,14 +3885,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul Dinamis Transaksi -->
-                <div id="lap-transaksi-header-title" style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div id="lap-transaksi-header-title"
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Transaksi Reguler
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="lap-transaksi-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -3574,11 +3911,16 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="lap-transaksi-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih Tanggal</div>
+                        <div id="lap-transaksi-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">
+                            Pilih Tanggal</div>
                     </div>
                     <div style="display:flex; gap:8px; align-items:center;">
-                        <button id="btn-lap-transaksi-expand-all" style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-down"></i> Buka Semua</button>
-                        <button id="btn-lap-transaksi-collapse-all" style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i class="fa-solid fa-angle-up"></i> Tutup Semua</button>
+                        <button id="btn-lap-transaksi-expand-all"
+                            style="background:#e0f2fe; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#0369a1; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                                class="fa-solid fa-angle-down"></i> Buka Semua</button>
+                        <button id="btn-lap-transaksi-collapse-all"
+                            style="background:#f1f5f9; border:none; padding:6px 12px; border-radius:6px; font-size:0.75rem; color:#475569; cursor:pointer; font-weight:600; transition:all 0.2s;"><i
+                                class="fa-solid fa-angle-up"></i> Tutup Semua</button>
                     </div>
                 </div>
             </div>
@@ -3617,7 +3959,8 @@
                     style="display:none; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                     <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                         style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                    <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                    <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode
+                        yang dipilih.
                     </div>
                 </div>
 
@@ -3633,7 +3976,8 @@
                     <i class="fa-solid fa-arrow-left"></i>
                 </button>
                 <div class="cd-header-center">
-                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo" style="height: 35px; border-radius: 4px;">
+                    <img src="logo_manjur.png" alt="Logo Manjur" class="dynamic-logo"
+                        style="height: 35px; border-radius: 4px;">
                 </div>
                 <div style="width: 40px; display:flex; justify-content:flex-end;">
                     <button class="btn-icon" id="btn-export-laba-rugi" style="color: #0ea5e9;">
@@ -3644,14 +3988,17 @@
 
             <div style="background: #ffffff; padding: 15px 20px 0 20px;">
                 <!-- Judul -->
-                <div style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
+                <div
+                    style="font-size: 1.1rem; font-weight: 600; color: #1e293b; margin-bottom: 15px; border-bottom: 1px solid #e2e8f0; padding-bottom: 10px;">
                     Laporan Laba Rugi
                 </div>
-                
+
                 <!-- Filter Section -->
-                <div style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
+                <div
+                    style="display: flex; align-items: flex-start; justify-content: space-between; padding-bottom: 15px; border-bottom: 1px solid #e2e8f0;">
                     <div style="display:flex; flex-direction:column; gap:3px;">
-                        <div style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
+                        <div
+                            style="display:flex; align-items:center; gap:8px; color:#334155; font-weight:600; font-size:0.9rem; position:relative;">
                             <i class="fa-regular fa-calendar-days" style="color:#3b82f6;"></i>
                             <select id="laba-rugi-date-filter"
                                 style="appearance:none; -webkit-appearance:none; border:none; background:transparent; font-family:inherit; font-size:inherit; font-weight:inherit; color:inherit; padding-right:15px; cursor:pointer; outline:none;">
@@ -3667,7 +4014,8 @@
                             <i class="fa-solid fa-caret-down"
                                 style="font-size:0.8rem; position:absolute; right:0; top:4px; pointer-events:none;"></i>
                         </div>
-                        <div id="laba-rugi-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih Tanggal</div>
+                        <div id="laba-rugi-date-text" style="font-size:0.75rem; color:#94a3b8; margin-left:24px;">Pilih
+                            Tanggal</div>
                     </div>
                 </div>
             </div>
@@ -3677,106 +4025,108 @@
                 style="display:flex; flex-direction:column; align-items:center; justify-content:center; padding: 60px 20px; text-align:center;">
                 <img src="https://cdn-icons-png.flaticon.com/512/7486/7486744.png"
                     style="width: 180px; margin-bottom: 20px;" alt="Empty Data">
-                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang dipilih.
+                <div style="font-size:0.9rem; color:#64748b; font-weight: 500;">Tidak ada data laporan pada periode yang
+                    dipilih.
                 </div>
             </div>
-            
+
             <div id="laba-rugi-data-state" style="display:none; flex-direction:column; width:100%;">
 
-            <div style="padding: 20px; display:flex; flex-direction:column; gap:20px; padding-bottom:80px;">
+                <div style="padding: 20px; display:flex; flex-direction:column; gap:20px; padding-bottom:80px;">
 
-                <!-- KARTU PENDAPATAN -->
-                <div
-                    style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
+                    <!-- KARTU PENDAPATAN -->
                     <div
-                        style="padding:15px 20px; background:#f0f9ff; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px;">
+                        style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
                         <div
-                            style="width:36px; height:36px; border-radius:10px; background:#bae6fd; color:#0369a1; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
-                            <i class="fa-solid fa-arrow-trend-up"></i>
+                            style="padding:15px 20px; background:#f0f9ff; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px;">
+                            <div
+                                style="width:36px; height:36px; border-radius:10px; background:#bae6fd; color:#0369a1; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                                <i class="fa-solid fa-arrow-trend-up"></i>
+                            </div>
+                            <div style="font-weight:700; color:#0369a1; font-size:1.1rem;">Rincian Pendapatan</div>
                         </div>
-                        <div style="font-weight:700; color:#0369a1; font-size:1.1rem;">Rincian Pendapatan</div>
+                        <div style="padding:0 20px;">
+                            <div
+                                style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
+                                <span style="color:#475569; font-size:0.9rem;">Pendapatan Kiloan</span>
+                                <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
+                                        id="lr-pendapatan-kiloan">150.000</span></span>
+                            </div>
+                            <div
+                                style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
+                                <span style="color:#475569; font-size:0.9rem;">Pendapatan Satuan</span>
+                                <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
+                                        id="lr-pendapatan-satuan">75.000</span></span>
+                            </div>
+                            <div
+                                style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
+                                <span style="color:#475569; font-size:0.9rem;">Pendapatan Cuci Saja</span>
+                                <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
+                                        id="lr-pendapatan-cuci">20.000</span></span>
+                            </div>
+                            <div
+                                style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
+                                <span style="color:#475569; font-size:0.9rem;">Pendapatan Setrika Saja</span>
+                                <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
+                                        id="lr-pendapatan-setrika">15.000</span></span>
+                            </div>
+                            <div style="display:flex; justify-content:space-between; padding:15px 0;">
+                                <span style="color:#475569; font-size:0.9rem;">Pendapatan Khusus ESD</span>
+                                <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
+                                        id="lr-pendapatan-esd">5.000</span></span>
+                            </div>
+                        </div>
+                        <div
+                            style="padding:15px 20px; background:#f8fafc; border-top:2px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
+                            <span style="color:#0f172a; font-weight:700; font-size:1rem;">Total Pendapatan</span>
+                            <span style="color:#0369a1; font-weight:800; font-size:1.15rem;">Rp <span
+                                    id="lr-total-pendapatan">265.000</span></span>
+                        </div>
                     </div>
-                    <div style="padding:0 20px;">
-                        <div
-                            style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
-                            <span style="color:#475569; font-size:0.9rem;">Pendapatan Kiloan</span>
-                            <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
-                                    id="lr-pendapatan-kiloan">150.000</span></span>
-                        </div>
-                        <div
-                            style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
-                            <span style="color:#475569; font-size:0.9rem;">Pendapatan Satuan</span>
-                            <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
-                                    id="lr-pendapatan-satuan">75.000</span></span>
-                        </div>
-                        <div
-                            style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
-                            <span style="color:#475569; font-size:0.9rem;">Pendapatan Cuci Saja</span>
-                            <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
-                                    id="lr-pendapatan-cuci">20.000</span></span>
-                        </div>
-                        <div
-                            style="display:flex; justify-content:space-between; padding:15px 0; border-bottom:1px dashed #e2e8f0;">
-                            <span style="color:#475569; font-size:0.9rem;">Pendapatan Setrika Saja</span>
-                            <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
-                                    id="lr-pendapatan-setrika">15.000</span></span>
-                        </div>
-                        <div style="display:flex; justify-content:space-between; padding:15px 0;">
-                            <span style="color:#475569; font-size:0.9rem;">Pendapatan Khusus ESD</span>
-                            <span style="font-weight:600; color:#1e293b; font-size:0.95rem;">Rp <span
-                                    id="lr-pendapatan-esd">5.000</span></span>
-                        </div>
-                    </div>
+
+                    <!-- KARTU PENGELUARAN -->
                     <div
-                        style="padding:15px 20px; background:#f8fafc; border-top:2px solid #e2e8f0; display:flex; justify-content:space-between; align-items:center;">
-                        <span style="color:#0f172a; font-weight:700; font-size:1rem;">Total Pendapatan</span>
-                        <span style="color:#0369a1; font-weight:800; font-size:1.15rem;">Rp <span
-                                id="lr-total-pendapatan">265.000</span></span>
-                    </div>
-                </div>
-
-                <!-- KARTU PENGELUARAN -->
-                <div
-                    style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
-                    <div
-                        style="padding:15px 20px; background:#fef2f2; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px;">
+                        style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
                         <div
-                            style="width:36px; height:36px; border-radius:10px; background:#fecaca; color:#b91c1c; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
-                            <i class="fa-solid fa-arrow-trend-down"></i>
+                            style="padding:15px 20px; background:#fef2f2; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px;">
+                            <div
+                                style="width:36px; height:36px; border-radius:10px; background:#fecaca; color:#b91c1c; display:flex; align-items:center; justify-content:center; font-size:1.1rem;">
+                                <i class="fa-solid fa-arrow-trend-down"></i>
+                            </div>
+                            <div style="font-weight:700; color:#b91c1c; font-size:1.1rem;">Pengeluaran</div>
                         </div>
-                        <div style="font-weight:700; color:#b91c1c; font-size:1.1rem;">Pengeluaran</div>
+                        <div style="padding:20px; display:flex; justify-content:space-between; align-items:center;">
+                            <span style="color:#475569; font-size:0.95rem;">Total Semua Pengeluaran</span>
+                            <span style="font-weight:700; color:#ef4444; font-size:1.15rem;">Rp <span
+                                    id="lr-total-pengeluaran">85.000</span></span>
+                        </div>
                     </div>
-                    <div style="padding:20px; display:flex; justify-content:space-between; align-items:center;">
-                        <span style="color:#475569; font-size:0.95rem;">Total Semua Pengeluaran</span>
-                        <span style="font-weight:700; color:#ef4444; font-size:1.15rem;">Rp <span
-                                id="lr-total-pengeluaran">85.000</span></span>
-                    </div>
-                </div>
 
-                <!-- KARTU LABA BERSIH -->
-                <div
-                    style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
-                    <div id="lr-laba-header"
-                        style="padding:15px 20px; background:#dcfce7; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px; transition:all 0.3s ease;">
-                        <div id="lr-laba-icon-container"
-                            style="width:36px; height:36px; border-radius:10px; background:#bbf7d0; color:#15803d; display:flex; align-items:center; justify-content:center; font-size:1.1rem; transition:all 0.3s ease;">
-                            <i id="lr-laba-icon" class="fa-solid fa-sack-dollar"></i>
+                    <!-- KARTU LABA BERSIH -->
+                    <div
+                        style="background:#ffffff; border-radius:16px; border:1px solid #e2e8f0; box-shadow:0 2px 10px rgba(0,0,0,0.02); overflow:hidden;">
+                        <div id="lr-laba-header"
+                            style="padding:15px 20px; background:#dcfce7; border-bottom:1px solid #e2e8f0; display:flex; align-items:center; gap:10px; transition:all 0.3s ease;">
+                            <div id="lr-laba-icon-container"
+                                style="width:36px; height:36px; border-radius:10px; background:#bbf7d0; color:#15803d; display:flex; align-items:center; justify-content:center; font-size:1.1rem; transition:all 0.3s ease;">
+                                <i id="lr-laba-icon" class="fa-solid fa-sack-dollar"></i>
+                            </div>
+                            <div id="lr-laba-title"
+                                style="font-weight:700; color:#15803d; font-size:1.1rem; transition:all 0.3s ease;">Laba
+                                /
+                                Rugi</div>
                         </div>
-                        <div id="lr-laba-title"
-                            style="font-weight:700; color:#15803d; font-size:1.1rem; transition:all 0.3s ease;">Laba /
-                            Rugi</div>
-                    </div>
-                    <div style="padding:20px; display:flex; flex-direction:column; align-items:center; gap:5px;">
-                        <div style="color:#64748b; font-size:0.85rem; text-align:center;">Total Pendapatan - Total
-                            Pengeluaran</div>
-                        <div id="lr-laba-amount"
-                            style="font-weight:800; color:#16a34a; font-size:1.8rem; text-align:center; transition:all 0.3s ease;">
-                            Rp 180.000
+                        <div style="padding:20px; display:flex; flex-direction:column; align-items:center; gap:5px;">
+                            <div style="color:#64748b; font-size:0.85rem; text-align:center;">Total Pendapatan - Total
+                                Pengeluaran</div>
+                            <div id="lr-laba-amount"
+                                style="font-weight:800; color:#16a34a; font-size:1.8rem; text-align:center; transition:all 0.3s ease;">
+                                Rp 180.000
+                            </div>
                         </div>
                     </div>
-                </div>
 
-            </div>
+                </div>
             </div>
         </div>
 
@@ -4003,24 +4353,29 @@
         style="display: none; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.5); z-index: 9999; justify-content: center; align-items: center;">
         <div
             style="background: #ffffff; width: 90%; max-width: 320px; border-radius: 8px; overflow: hidden; box-shadow: 0 10px 25px rgba(0,0,0,0.2); font-family: 'Plus Jakarta Sans', sans-serif;">
-            
+
             <div style="background: #0ea5e9; padding: 20px; color: #ffffff; text-align:center;">
-                <div style="font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600;">PILIH BULAN</div>
+                <div style="font-size: 0.85rem; letter-spacing: 1px; margin-bottom: 5px; font-weight: 600;">PILIH BULAN
+                </div>
                 <div id="modal-month-text" style="font-size: 1.5rem; font-weight: 600;">Juli 2026</div>
             </div>
 
             <div style="padding: 20px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                    <i id="btn-month-prev-year" class="fa-solid fa-chevron-left" style="cursor: pointer; color: #64748b; padding:10px;"></i>
-                    <div id="modal-month-year-display" style="font-weight: 700; color: #334155; font-size: 1.1rem;">2026</div>
-                    <i id="btn-month-next-year" class="fa-solid fa-chevron-right" style="cursor: pointer; color: #64748b; padding:10px;"></i>
+                    <i id="btn-month-prev-year" class="fa-solid fa-chevron-left"
+                        style="cursor: pointer; color: #64748b; padding:10px;"></i>
+                    <div id="modal-month-year-display" style="font-weight: 700; color: #334155; font-size: 1.1rem;">2026
+                    </div>
+                    <i id="btn-month-next-year" class="fa-solid fa-chevron-right"
+                        style="cursor: pointer; color: #64748b; padding:10px;"></i>
                 </div>
 
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; text-align: center;">
                     <!-- Months generated by JS -->
                 </div>
 
-                <div style="display: flex; justify-content: flex-end; gap: 20px; margin-top: 20px; font-weight: 600; font-size: 0.9rem;">
+                <div
+                    style="display: flex; justify-content: flex-end; gap: 20px; margin-top: 20px; font-weight: 600; font-size: 0.9rem;">
                     <div id="btn-month-batal" style="color: #0ea5e9; cursor: pointer; padding: 5px;">BATAL</div>
                     <div id="btn-month-oke" style="color: #0ea5e9; cursor: pointer; padding: 5px;">OKE</div>
                 </div>
@@ -4028,25 +4383,25 @@
         </div>
     </div>
 
-    <script src="main.js?v=6.0"></script>
+    <script src="main.js?v=6.2"></script>
 
     <script>
         // Register Service Worker for PWA (Installable on Mobile/Tablet)
         if ('serviceWorker' in navigator && location.protocol.startsWith('http')) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('sw.js').then(function(registration) {
+            window.addEventListener('load', function () {
+                navigator.serviceWorker.register('sw.js').then(function (registration) {
                     console.log('ServiceWorker registered successfully.');
-                }, function(err) {
+                }, function (err) {
                     console.log('ServiceWorker registration failed: ', err);
                 });
             });
         }
     </script>
     <script src="app.js"></script>
-    <script src="laporan.js?v=6.0"></script>
+    <script src="laporan.js?v=6.2"></script>
     <script>
         // AUTO-FIX DATE SCRIPT (Run once to fix corrupted dates)
-        window.cleanDatabaseDates = function() {
+        window.cleanDatabaseDates = function () {
             let changed = false;
             const pad = (n) => n.toString().padStart(2, '0');
 
@@ -4062,11 +4417,11 @@
                         localStorage.setItem('db_pengeluaran', JSON.stringify(cleanPeng));
                     }
                     changed = true;
-                } catch(e) {
+                } catch (e) {
                     console.error('Error sanitizing recovered pemasukan:', e);
                 }
             }
-            
+
             // Clean localStorage
             ['db_pemasukan', 'db_pengeluaran'].forEach(key => {
                 try {
@@ -4074,7 +4429,7 @@
                     let localChanged = false;
                     data.forEach(trx => {
                         if (!trx || !trx.id) return;
-                        
+
                         // 1. Pemasukan (MJL-MMYY- or MJL-YYMM-)
                         if (trx.id.startsWith('MJL-')) {
                             let parts = trx.id.split('-');
@@ -4090,11 +4445,11 @@
                                     expMonth = parseInt(parts[1].substring(0, 2), 10);
                                     expYear = 2000 + parseInt(parts[1].substring(2, 4), 10);
                                 }
-                                
+
                                 let d = window.parseDateString ? window.parseDateString(trx.date, trx.id) : new Date(trx.date);
                                 let est = trx.estDate ? (window.parseDateString ? window.parseDateString(trx.estDate) : new Date(trx.estDate)) : null;
                                 let needsRepair = !d || isNaN(d.getTime()) || d.getFullYear() !== expYear || (d.getMonth() + 1) !== expMonth;
-                                
+
                                 if (needsRepair) {
                                     if (est && !isNaN(est.getTime()) && est.getFullYear() === expYear) {
                                         let orderTime = new Date(est.getTime() - 24 * 3600 * 1000);
@@ -4117,7 +4472,7 @@
                                 }
                             }
                         }
-                        
+
                         // 2. Pengeluaran / Transfer / Koreksi with timestamp ID
                         if (trx.id.match(/^(EXP|INC|TRF-OUT|TRF-IN|KOR-IN|KOR-OUT)-/)) {
                             let idParts = trx.id.split('-');
@@ -4137,9 +4492,9 @@
                         localStorage.setItem(key, JSON.stringify(data));
                         changed = true;
                     }
-                } catch(e){}
+                } catch (e) { }
             });
-            
+
             // Clean globalApiData in memory as well
             if (window.globalApiData) {
                 ['pemasukan', 'pengeluaran'].forEach(k => {
@@ -4180,7 +4535,7 @@
             }
             return changed;
         };
-        
+
         // Eksekusi saat browser idle agar tidak membebani startup tablet
         const triggerDateCleanup = () => {
             if (typeof window.cleanDatabaseDates === 'function' && window.cleanDatabaseDates()) {
@@ -4202,8 +4557,8 @@
         } else {
             setTimeout(triggerDateCleanup, 1000);
         }
-        
-        window.exportBackupData = function() {
+
+        window.exportBackupData = function () {
             try {
                 let backupData = {};
                 for (let i = 0; i < localStorage.length; i++) {
@@ -4214,14 +4569,14 @@
                 const blob = new Blob([jsonStr], { type: "application/json" });
                 const url = URL.createObjectURL(blob);
                 const a = document.createElement('a');
-                
+
                 const now = new Date();
                 const year = now.getFullYear();
                 const month = String(now.getMonth() + 1).padStart(2, '0');
                 const day = String(now.getDate()).padStart(2, '0');
                 const hours = String(now.getHours()).padStart(2, '0');
                 const minutes = String(now.getMinutes()).padStart(2, '0');
-                
+
                 a.href = url;
                 a.download = `Backup_Manjur_Laundry_${year}${month}${day}_${hours}${minutes}.json`;
                 document.body.appendChild(a);
@@ -4229,23 +4584,23 @@
                 document.body.removeChild(a);
                 URL.revokeObjectURL(url);
                 if (typeof window.showToast === 'function') window.showToast('Backup berhasil diunduh!');
-            } catch(e) {
+            } catch (e) {
                 console.error(e);
                 if (typeof window.showToast === 'function') window.showToast('Gagal melakukan backup.');
             }
         };
 
-        window.importBackupData = function(event) {
+        window.importBackupData = function (event) {
             const file = event.target.files[0];
             if (!file) return;
-            
+
             if (!confirm('Peringatan: Data di aplikasi ini akan ditimpa dengan data dari file backup. Apakah Anda yakin ingin melanjutkan?')) {
                 event.target.value = ''; // Reset input
                 return;
             }
-            
+
             const reader = new FileReader();
-            reader.onload = function(e) {
+            reader.onload = function (e) {
                 try {
                     const importedData = JSON.parse(e.target.result);
                     // Hapus localStorage saat ini
@@ -4269,7 +4624,7 @@
             reader.readAsText(file);
         };
 
-        window.exportPesananKeExcel = function() {
+        window.exportPesananKeExcel = function () {
             const activeChip = document.querySelector('.p-tab-btn.active');
             const filterName = activeChip ? activeChip.getAttribute('data-filter') : 'semua';
             const filterLabel = activeChip ? activeChip.innerText.trim() : 'Semua';
@@ -4280,7 +4635,7 @@
             } else {
                 try {
                     orderHistory = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
-                } catch(e) {}
+                } catch (e) { }
             }
             if ((!orderHistory || orderHistory.length === 0) && window.globalApiData && Array.isArray(window.globalApiData.pemasukan)) {
                 orderHistory = window.globalApiData.pemasukan;
@@ -4401,7 +4756,7 @@
             }
         };
 
-        window.handleHeaderExportExcel = function() {
+        window.handleHeaderExportExcel = function () {
             // When user clicks the top-right Excel icon on Pesanan menu:
             const tabPesanan = document.getElementById('tab-pesanan');
             if (tabPesanan && tabPesanan.style.display !== 'none') {
@@ -4418,18 +4773,218 @@
             window.exportPesananKeExcel();
         };
 
-        window.handleAppRefresh = function() {
+        window.handleAppRefresh = function () {
             const activeBNav = document.querySelector('.b-nav-btn.active');
             if (activeBNav) {
                 sessionStorage.setItem('restore_bnav', activeBNav.getAttribute('data-bnav'));
             }
-            
+
             const activePTab = document.querySelector('.p-tab-btn.active');
             if (activePTab) {
                 sessionStorage.setItem('restore_ptab', activePTab.getAttribute('data-filter'));
             }
-            
+
             location.reload();
+        };
+
+        // --- UNIVERSAL PESANAN SORT ENGINE (DOM + DATA) ---
+        window.currentSortColumn = window.currentSortColumn || 'date';
+        window.currentSortDirection = window.currentSortDirection || 'desc';
+
+        window.parseInvoiceIdRank = function (idStr) {
+            const s = String(idStr || '').trim();
+            const m = s.match(/MJL-(\d{2})(\d{2})-(\d+)/i);
+            if (m) {
+                const mm = parseInt(m[1], 10) || 0;
+                const yy = parseInt(m[2], 10) || 0;
+                const seq = parseInt(m[3], 10) || 0;
+                return yy * 10000000 + mm * 100000 + seq;
+            }
+            return parseInt(s.replace(/\D/g, ''), 10) || 0;
+        };
+
+        window.applyPesananSort = function (list) {
+            if (!Array.isArray(list)) return list;
+            const column = window.currentSortColumn || 'date';
+            const dir = window.currentSortDirection === 'asc' ? 1 : -1;
+            const statusOrder = { 'validasi': 1, 'antrian': 2, 'cuci-jemur': 3, 'setrika': 4, 'selesai': 5, 'diambil': 6 };
+
+            list.sort((a, b) => {
+                if (!a || !b) return 0;
+                let valA, valB;
+
+                if (column === 'id') {
+                    valA = window.parseInvoiceIdRank(a.id);
+                    valB = window.parseInvoiceIdRank(b.id);
+                } else if (column === 'date') {
+                    const dA = window.parseDateString ? window.parseDateString(a.date, a.id, a.estDate) : new Date(a.date || 0);
+                    const dB = window.parseDateString ? window.parseDateString(b.date, b.id, b.estDate) : new Date(b.date || 0);
+                    valA = dA && !isNaN(dA.getTime()) ? dA.getTime() : 0;
+                    valB = dB && !isNaN(dB.getTime()) ? dB.getTime() : 0;
+                    if (valA === valB) {
+                        return (window.parseInvoiceIdRank(a.id) - window.parseInvoiceIdRank(b.id)) * dir;
+                    }
+                } else if (column === 'customerName') {
+                    valA = String(a.customerName || '').trim().toLowerCase();
+                    valB = String(b.customerName || '').trim().toLowerCase();
+                    const cmp = valA.localeCompare(valB, 'id');
+                    if (cmp !== 0) return cmp * dir;
+                    return (window.parseInvoiceIdRank(b.id) - window.parseInvoiceIdRank(a.id));
+                } else if (column === 'service') {
+                    valA = String((a.items && a.items[0] && a.items[0].name) || a.layanan || '').trim().toLowerCase();
+                    valB = String((b.items && b.items[0] && b.items[0].name) || b.layanan || '').trim().toLowerCase();
+                    const cmp = valA.localeCompare(valB, 'id');
+                    if (cmp !== 0) return cmp * dir;
+                    return (window.parseInvoiceIdRank(b.id) - window.parseInvoiceIdRank(a.id));
+                } else if (column === 'total') {
+                    valA = parseFloat(a.total) || 0;
+                    valB = parseFloat(b.total) || 0;
+                } else if (column === 'paymentStatus') {
+                    const aDibayar = parseFloat(a.dibayar) || 0;
+                    const aTotal = parseFloat(a.total) || 0;
+                    const bDibayar = parseFloat(b.dibayar) || 0;
+                    const bTotal = parseFloat(b.total) || 0;
+                    valA = (aDibayar >= aTotal && aTotal > 0) ? 1 : 0;
+                    valB = (bDibayar >= bTotal && bTotal > 0) ? 1 : 0;
+                    if (valA === valB) {
+                        return (window.parseInvoiceIdRank(b.id) - window.parseInvoiceIdRank(a.id));
+                    }
+                } else if (column === 'method') {
+                    const aLunas = (parseFloat(a.dibayar) || 0) >= (parseFloat(a.total) || 0);
+                    const bLunas = (parseFloat(b.dibayar) || 0) >= (parseFloat(b.total) || 0);
+                    valA = aLunas ? String(a.cashbox || a.metodeBayar || 'Tunai').toLowerCase() : 'zzz';
+                    valB = bLunas ? String(b.cashbox || b.metodeBayar || 'Tunai').toLowerCase() : 'zzz';
+                } else if (column === 'status') {
+                    valA = statusOrder[String(a.status || 'validasi').toLowerCase()] || 1;
+                    valB = statusOrder[String(b.status || 'validasi').toLowerCase()] || 1;
+                } else {
+                    valA = String(a[column] || '').toLowerCase();
+                    valB = String(b[column] || '').toLowerCase();
+                }
+
+                if (valA < valB) return -1 * dir;
+                if (valA > valB) return 1 * dir;
+                return (window.parseInvoiceIdRank(b.id) - window.parseInvoiceIdRank(a.id));
+            });
+            return list;
+        };
+
+        window.updatePesananSortIcons = function () {
+            const cols = document.querySelectorAll('#pesanan-header-wrapper .h-col[data-sort-col]');
+            cols.forEach(col => {
+                const colName = col.getAttribute('data-sort-col');
+                const icon = col.querySelector('i');
+                if (!icon) return;
+                if (colName === window.currentSortColumn) {
+                    icon.className = window.currentSortDirection === 'asc'
+                        ? 'fa-solid fa-sort-up sort-icon'
+                        : 'fa-solid fa-sort-down sort-icon';
+                    icon.style.color = '#0ea5e9';
+                } else {
+                    icon.className = 'fa-solid fa-sort sort-icon';
+                    icon.style.color = '#94a3b8';
+                }
+            });
+        };
+
+        window.sortPesananDOM = function () {
+            const dashContainer = document.getElementById('dashboard-pesanan-list');
+            if (!dashContainer) return false;
+            const rows = Array.from(dashContainer.querySelectorAll('.pesanan-row'));
+            if (rows.length === 0) return false;
+
+            const column = window.currentSortColumn || 'date';
+            const dir = window.currentSortDirection === 'asc' ? 1 : -1;
+            const statusOrder = { 'validasi': 1, 'antrian': 2, 'cuci-jemur': 3, 'setrika': 4, 'selesai': 5, 'diambil': 6 };
+
+            const getRowId = (r) => (r.querySelector('.p-id')?.innerText || '').trim();
+
+            rows.sort((rA, rB) => {
+                const idA = getRowId(rA);
+                const idB = getRowId(rB);
+                let valA, valB;
+
+                if (column === 'id') {
+                    valA = window.parseInvoiceIdRank(idA);
+                    valB = window.parseInvoiceIdRank(idB);
+                } else if (column === 'date') {
+                    const dStrA = (rA.querySelector('.p-date')?.innerText || '').trim();
+                    const dStrB = (rB.querySelector('.p-date')?.innerText || '').trim();
+                    valA = Date.parse(dStrA) || 0;
+                    valB = Date.parse(dStrB) || 0;
+                    if (valA === valB) {
+                        return (window.parseInvoiceIdRank(idA) - window.parseInvoiceIdRank(idB)) * dir;
+                    }
+                } else if (column === 'customerName') {
+                    valA = (rA.querySelector('.p-name')?.innerText || '').trim().toLowerCase();
+                    valB = (rB.querySelector('.p-name')?.innerText || '').trim().toLowerCase();
+                    const cmp = valA.localeCompare(valB, 'id');
+                    if (cmp !== 0) return cmp * dir;
+                    return (window.parseInvoiceIdRank(idB) - window.parseInvoiceIdRank(idA));
+                } else if (column === 'service') {
+                    valA = (rA.querySelector('.p-service')?.innerText || '').trim().toLowerCase();
+                    valB = (rB.querySelector('.p-service')?.innerText || '').trim().toLowerCase();
+                    const cmp = valA.localeCompare(valB, 'id');
+                    if (cmp !== 0) return cmp * dir;
+                    return (window.parseInvoiceIdRank(idB) - window.parseInvoiceIdRank(idA));
+                } else if (column === 'total') {
+                    const pA = (rA.querySelector('.p-price')?.innerText || '0').replace(/[^0-9.-]/g, '');
+                    const pB = (rB.querySelector('.p-price')?.innerText || '0').replace(/[^0-9.-]/g, '');
+                    valA = parseFloat(pA) || 0;
+                    valB = parseFloat(pB) || 0;
+                } else if (column === 'paymentStatus') {
+                    const sA = rA.querySelector('.status-bayar-dropdown')?.value || rA.getAttribute('data-payment-status') || 'belum';
+                    const sB = rB.querySelector('.status-bayar-dropdown')?.value || rB.getAttribute('data-payment-status') || 'belum';
+                    valA = sA === 'lunas' ? 1 : 0;
+                    valB = sB === 'lunas' ? 1 : 0;
+                    if (valA === valB) {
+                        return (window.parseInvoiceIdRank(idB) - window.parseInvoiceIdRank(idA));
+                    }
+                } else if (column === 'method') {
+                    const colsA = rA.querySelectorAll('.p-col');
+                    const colsB = rB.querySelectorAll('.p-col');
+                    const mA = (colsA[6]?.innerText || '').trim().toLowerCase();
+                    const mB = (colsB[6]?.innerText || '').trim().toLowerCase();
+                    valA = mA.includes('bayar') ? 'zzz' : mA;
+                    valB = mB.includes('bayar') ? 'zzz' : mB;
+                    const cmp = valA.localeCompare(valB, 'id');
+                    if (cmp !== 0) return cmp * dir;
+                    return (window.parseInvoiceIdRank(idB) - window.parseInvoiceIdRank(idA));
+                } else if (column === 'status') {
+                    const stA = (rA.querySelector('.status-dropdown')?.value || rA.getAttribute('data-status') || 'validasi').toLowerCase();
+                    const stB = (rB.querySelector('.status-dropdown')?.value || rB.getAttribute('data-status') || 'validasi').toLowerCase();
+                    valA = statusOrder[stA] || 1;
+                    valB = statusOrder[stB] || 1;
+                } else {
+                    valA = idA;
+                    valB = idB;
+                }
+
+                if (valA < valB) return -1 * dir;
+                if (valA > valB) return 1 * dir;
+                return (window.parseInvoiceIdRank(idB) - window.parseInvoiceIdRank(idA));
+            });
+
+            const frag = document.createDocumentFragment();
+            rows.forEach(r => frag.appendChild(r));
+            const emptyMsg = document.getElementById('pesanan-empty-msg');
+            dashContainer.appendChild(frag);
+            if (emptyMsg) dashContainer.appendChild(emptyMsg);
+            return true;
+        };
+
+        window.sortPesanan = function (column) {
+            if (window.currentSortColumn === column) {
+                window.currentSortDirection = window.currentSortDirection === 'asc' ? 'desc' : 'asc';
+            } else {
+                window.currentSortColumn = column;
+                window.currentSortDirection = (column === 'date' || column === 'id' || column === 'total') ? 'desc' : 'asc';
+            }
+            window.updatePesananSortIcons();
+            const sortedDOM = window.sortPesananDOM();
+            if (!sortedDOM && typeof window.renderDashboardPesanan === 'function') {
+                window.renderDashboardPesanan();
+            }
         };
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -4438,7 +4993,7 @@
                 setTimeout(() => {
                     const btn = document.querySelector(`.b-nav-btn[data-bnav="${restoreBNav}"]`);
                     if (btn) btn.click();
-                    
+
                     if (restoreBNav === 'pesanan') {
                         const restorePTab = sessionStorage.getItem('restore_ptab');
                         if (restorePTab) {
@@ -4448,7 +5003,7 @@
                             }, 50);
                         }
                     }
-                    
+
                     sessionStorage.removeItem('restore_bnav');
                     sessionStorage.removeItem('restore_ptab');
                 }, 100);
@@ -4458,17 +5013,3 @@
 </body>
 
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
