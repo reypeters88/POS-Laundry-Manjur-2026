@@ -1,19 +1,19 @@
-const CACHE_NAME = 'manjur-laundry-v63';
+const CACHE_NAME = 'manjur-laundry-v64';
 const urlsToCache = [
   './',
   './index.html',
   './style.css',
   './style.css?v=11',
   './main.js',
-  './main.js?v=6.3',
+  './main.js?v=6.4',
   './laporan.js',
-  './laporan.js?v=6.3',
+  './laporan.js?v=6.4',
   './app.js',
   './manifest.json',
   './logo_manjur.png',
   './xlsx.full.min.js',
   './database_recovered.js',
-  './database_recovered.js?v=6.3'
+  './database_recovered.js?v=6.4'
 ];
 
 self.addEventListener('install', event => {

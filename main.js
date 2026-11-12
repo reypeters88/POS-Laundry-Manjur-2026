@@ -1338,6 +1338,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 targetEl.style.display = 'block';
                 setTimeout(() => targetEl.classList.add('active'), 10);
             }
+
+            if (targetNav === 'pesanan') {
+                const dashContainer = document.getElementById('dashboard-pesanan-list');
+                if (dashContainer && dashContainer.querySelectorAll('.pesanan-row').length === 0 && typeof renderDashboardPesanan === 'function') {
+                    renderDashboardPesanan();
+                } else {
+                    if (typeof updateDashboardCounts === 'function') updateDashboardCounts();
+                    const activeChip = document.querySelector('.p-tab-btn.active');
+                    if (typeof filterPesanan === 'function') filterPesanan(activeChip ? activeChip.getAttribute('data-filter') : 'semua');
+                }
+            }
         });
     });
 
@@ -1439,10 +1450,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         let visibleCount = 0;
+        let tabCounts = {
+            semua: 0,
+            validasi: 0,
+            antrian: 0,
+            cuci: 0,
+            setrika: 0,
+            selesai: 0
+        };
         currentRows.forEach(row => {
             const rawStatus = row.getAttribute('data-status') || row.querySelector('.status-dropdown')?.value || 'validasi';
             const rowStatus = window.normalizeOrderStatus ? window.normalizeOrderStatus(rawStatus) : String(rawStatus).toLowerCase().trim();
-            if (rowStatus === 'diambil') {
+            if (rowStatus === 'diambil' || rowStatus === 'batal') {
                 row.style.display = 'none';
                 return;
             }
@@ -1470,6 +1489,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
 
+            if (textMatch && dateMatch) {
+                if (rowStatus !== 'selesai') tabCounts.semua++;
+                if (rowStatus === 'validasi') tabCounts.validasi++;
+                else if (rowStatus === 'antrian') tabCounts.antrian++;
+                else if (rowStatus === 'cuci-jemur' || rowStatus === 'cuci') tabCounts.cuci++;
+                else if (rowStatus === 'setrika') tabCounts.setrika++;
+                else if (rowStatus === 'selesai') tabCounts.selesai++;
+            }
+
             if (statusMatch && textMatch && paymentMatch && dateMatch) {
                 row.style.display = 'flex';
                 visibleCount++;
@@ -1477,6 +1505,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 row.style.display = 'none';
             }
         });
+
+        if (currentRows.length > 0) {
+            const setTabBadge = (id, val) => {
+                document.querySelectorAll('[id="' + id + '"]').forEach(el => { el.innerText = val; });
+            };
+            setTabBadge('ptab-badge-semua', tabCounts.semua);
+            setTabBadge('ptab-badge-validasi', tabCounts.validasi);
+            setTabBadge('ptab-badge-antrian', tabCounts.antrian);
+            setTabBadge('ptab-badge-cuci', tabCounts.cuci);
+            setTabBadge('ptab-badge-setrika', tabCounts.setrika);
+            setTabBadge('ptab-badge-selesai', tabCounts.selesai);
+        }
 
         const dashContainer = document.getElementById('dashboard-pesanan-list');
         if (dashContainer) {
@@ -6600,29 +6640,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let masukCount = todayOrderHistory.length;
-        let semuaCount = countsHistory.filter(o => {
-            if (!o) return false;
+        const validOrders = countsHistory.filter(o => o && o.id && !o.type);
+        let semuaCount = validOrders.filter(o => {
             const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase();
-            return st !== 'selesai' && st !== 'diambil';
+            return st !== 'selesai' && st !== 'diambil' && st !== 'batal';
         }).length;
-        let validasiCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase()) === 'validasi').length;
-        let antrianCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'antrian').length;
-        let cuciCount = countsHistory.filter(o => {
-            if (!o) return false;
+        let validasiCount = validOrders.filter(o => (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase()) === 'validasi').length;
+        let antrianCount = validOrders.filter(o => (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'antrian').length;
+        let cuciCount = validOrders.filter(o => {
             const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase();
             return st === 'cuci-jemur' || st === 'cuci';
         }).length;
-        let setrikaCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'setrika').length;
-        let selesaiCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'selesai').length;
+        let setrikaCount = validOrders.filter(o => (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'setrika').length;
+        let selesaiCount = validOrders.filter(o => (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'selesai').length;
 
         // Hitung Harus Selesai (hari ini) dan Terlambat
         let harusSelesaiCount = 0;
         let terlambatCount = 0;
 
-        countsHistory.forEach(o => {
-            if (!o) return;
+        validOrders.forEach(o => {
             const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase();
-            if (st !== 'selesai' && st !== 'diambil' && o.date) {
+            if (st !== 'selesai' && st !== 'diambil' && st !== 'batal' && o.date) {
                 let orderDate = window.parseDateString ? window.parseDateString(o.date, o.id, o.estDate) : new Date(o.date);
                 if (orderDate && !isNaN(orderDate.getTime())) {
                     orderDate.setHours(0, 0, 0, 0);
@@ -6646,8 +6684,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         const updateEl = (id, val) => {
-            const el = document.getElementById(id);
-            if (el) el.innerText = val;
+            document.querySelectorAll('[id="' + id + '"]').forEach(el => {
+                el.innerText = val;
+            });
         };
 
         let topupPaketCount = 0;
@@ -6687,6 +6726,13 @@ document.addEventListener('DOMContentLoaded', () => {
         updateEl('badge-cuci', cuciCount);
         updateEl('badge-setrika', setrikaCount);
         updateEl('badge-selesai', selesaiCount);
+
+        updateEl('ptab-badge-semua', semuaCount);
+        updateEl('ptab-badge-validasi', validasiCount);
+        updateEl('ptab-badge-antrian', antrianCount);
+        updateEl('ptab-badge-cuci', cuciCount);
+        updateEl('ptab-badge-setrika', setrikaCount);
+        updateEl('ptab-badge-selesai', selesaiCount);
     }
     window.updateDashboardCounts = updateDashboardCounts;
 
