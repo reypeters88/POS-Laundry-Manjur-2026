@@ -1415,9 +1415,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Filter Function
     function filterPesanan(filterValue) {
+        filterValue = String(filterValue || 'semua').toLowerCase().trim();
         const keywordInput = document.getElementById('input-search-pesanan');
         const keyword = keywordInput ? keywordInput.value.toLowerCase().trim() : '';
-        const currentRows = document.querySelectorAll('.pesanan-row');
+        const currentRows = document.querySelectorAll('#dashboard-pesanan-list .pesanan-row');
         const paymentFilterContainer = document.getElementById('container-payment-filter');
         const paymentFilterInput = document.getElementById('pesanan-payment-filter');
         const dateFilterInput = document.getElementById('pesanan-date-filter');
@@ -1439,16 +1440,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let visibleCount = 0;
         currentRows.forEach(row => {
-            if (row.getAttribute('data-status') === 'diambil') {
+            const rawStatus = row.getAttribute('data-status') || row.querySelector('.status-dropdown')?.value || 'validasi';
+            const rowStatus = window.normalizeOrderStatus ? window.normalizeOrderStatus(rawStatus) : String(rawStatus).toLowerCase().trim();
+            if (rowStatus === 'diambil') {
                 row.style.display = 'none';
                 return;
             }
 
-            const statusMatch = (filterValue === 'semua' && row.getAttribute('data-status') !== 'selesai') ||
+            const statusMatch = (filterValue === 'semua' && rowStatus !== 'selesai') ||
                 (filterValue === 'terlambat' && row.getAttribute('data-terlambat') === 'true') ||
                 (filterValue === 'masuk' && row.getAttribute('data-masuk') === 'true') ||
                 (filterValue === 'harus-selesai' && row.getAttribute('data-harus-selesai') === 'true') ||
-                row.getAttribute('data-status') === filterValue;
+                ((filterValue === 'cuci' || filterValue === 'cuci-jemur') && rowStatus === 'cuci-jemur') ||
+                rowStatus === filterValue;
             const textMatch = !keyword || row.textContent.toLowerCase().includes(keyword);
 
             const paymentStatus = row.getAttribute('data-payment-status');
@@ -1493,13 +1497,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     }
+    window.filterPesanan = filterPesanan;
+
+    window.switchPesananTab = function (chipEl) {
+        if (!chipEl) return;
+        document.querySelectorAll('.p-tab-btn').forEach(c => c.classList.remove('active'));
+        chipEl.classList.add('active');
+        filterPesanan(chipEl.getAttribute('data-filter'));
+    };
 
     // Chip Click Events
     pesananChips.forEach(chip => {
         chip.addEventListener('click', () => {
-            pesananChips.forEach(c => c.classList.remove('active'));
-            chip.classList.add('active');
-            filterPesanan(chip.getAttribute('data-filter'));
+            window.switchPesananTab(chip);
         });
     });
 
@@ -6066,6 +6076,133 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    window.getStatusDropdownStyle = function (st) {
+        const s = window.normalizeOrderStatus ? window.normalizeOrderStatus(st) : String(st || 'validasi').toLowerCase().trim();
+        const styles = {
+            'validasi': { bg: '#f1f5f9', color: '#334155', border: '#cbd5e1', label: 'Validasi' },
+            'antrian': { bg: '#fef3c7', color: '#b45309', border: '#fcd34d', label: 'Antrian' },
+            'cuci-jemur': { bg: '#e0f2fe', color: '#0369a1', border: '#7dd3fc', label: 'Cuci/Jemur' },
+            'setrika': { bg: '#f3e8ff', color: '#6b21a8', border: '#d8b4fe', label: 'Setrika' },
+            'selesai': { bg: '#dcfce7', color: '#166534', border: '#86efac', label: 'Selesai' },
+            'diambil': { bg: '#e2e8f0', color: '#475569', border: '#94a3b8', label: 'Diambil' }
+        };
+        return styles[s] || styles['validasi'];
+    };
+
+    window.applyStatusDropdownStyle = function (selectEl, st) {
+        if (!selectEl) return;
+        const stStyle = window.getStatusDropdownStyle(st);
+        selectEl.style.backgroundColor = stStyle.bg;
+        selectEl.style.color = stStyle.color;
+        selectEl.style.borderColor = stStyle.border;
+        selectEl.style.fontWeight = '700';
+    };
+
+    window.persistOrderChange = function (orderId, updaterFn) {
+        if (!orderId || typeof updaterFn !== 'function') return null;
+        let updatedOrder = null;
+
+        // 1. Update in-memory orderHistory
+        if (Array.isArray(orderHistory)) {
+            const idx = orderHistory.findIndex(o => o && o.id === orderId);
+            if (idx > -1) {
+                updaterFn(orderHistory[idx]);
+                updatedOrder = orderHistory[idx];
+            }
+        }
+
+        // 2. Update window.globalApiData.pemasukan
+        if (window.globalApiData && Array.isArray(window.globalApiData.pemasukan)) {
+            const gIdx = window.globalApiData.pemasukan.findIndex(o => o && o.id === orderId);
+            if (gIdx > -1) {
+                updaterFn(window.globalApiData.pemasukan[gIdx]);
+                if (!updatedOrder) updatedOrder = window.globalApiData.pemasukan[gIdx];
+            }
+        }
+
+        // 3. Update window.RECOVERED_PEMASUKAN
+        if (Array.isArray(window.RECOVERED_PEMASUKAN)) {
+            const rIdx = window.RECOVERED_PEMASUKAN.findIndex(o => o && o.id === orderId);
+            if (rIdx > -1) {
+                updaterFn(window.RECOVERED_PEMASUKAN[rIdx]);
+            }
+        }
+
+        // 4. Update localStorage db_pemasukan
+        try {
+            let dbPem = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
+            if (!Array.isArray(dbPem) || dbPem.length === 0) {
+                dbPem = Array.isArray(orderHistory) ? orderHistory : [];
+            }
+            const lIdx = dbPem.findIndex(o => o && o.id === orderId);
+            if (lIdx > -1) {
+                updaterFn(dbPem[lIdx]);
+                if (!updatedOrder) updatedOrder = dbPem[lIdx];
+            }
+            localStorage.setItem('db_pemasukan', JSON.stringify(dbPem));
+        } catch (e) {
+            console.error('persistOrderChange error:', e);
+        }
+
+        return updatedOrder;
+    };
+
+    window.updateOrderStatus = function (orderId, rawNewStatus, rowEl, selectEl) {
+        const newStatus = window.normalizeOrderStatus ? window.normalizeOrderStatus(rawNewStatus) : String(rawNewStatus || 'validasi').toLowerCase().trim();
+        const nowTs = Date.now();
+
+        // Save authoritative status override so background pulls never revert user changes
+        try {
+            const stOverrides = JSON.parse(localStorage.getItem('db_status_overrides') || '{}') || {};
+            stOverrides[orderId] = { status: newStatus, updatedAt: nowTs };
+            localStorage.setItem('db_status_overrides', JSON.stringify(stOverrides));
+        } catch (e) { }
+
+        window.persistOrderChange(orderId, (o) => {
+            o.status = newStatus;
+            o.statusUpdatedAt = nowTs;
+        });
+
+        if (rowEl) {
+            rowEl.setAttribute('data-status', newStatus);
+            if (newStatus === 'selesai' || newStatus === 'diambil') {
+                rowEl.setAttribute('data-terlambat', 'false');
+                rowEl.setAttribute('data-harus-selesai', 'false');
+            }
+        }
+        if (selectEl) {
+            window.applyStatusDropdownStyle(selectEl, newStatus);
+        }
+
+        updateDashboardCounts();
+
+        const activeChip = document.querySelector('.p-tab-btn.active');
+        const activeFilter = activeChip ? activeChip.getAttribute('data-filter') : 'semua';
+        if (typeof filterPesanan === 'function') {
+            filterPesanan(activeFilter);
+        }
+
+        const stInfo = window.getStatusDropdownStyle(newStatus);
+        if (typeof window.showToast === 'function') {
+            window.showToast(`✅ Progres ${orderId} dipindahkan ke ${stInfo.label}`);
+        }
+    };
+
+    window.savePaymentOverride = function (order) {
+        if (!order || !order.id) return;
+        try {
+            const payOverrides = JSON.parse(localStorage.getItem('db_payment_overrides') || '{}') || {};
+            payOverrides[order.id] = {
+                dibayar: order.dibayar,
+                cashbox: order.cashbox,
+                metodeBayar: order.metodeBayar,
+                paymentHistory: order.paymentHistory || [],
+                updatedAt: Date.now()
+            };
+            localStorage.setItem('db_payment_overrides', JSON.stringify(payOverrides));
+        } catch (e) { }
+    };
+
     window.payCicilan = function (orderId) {
         const input = document.getElementById('cicilan-' + orderId);
         const methodSelect = document.getElementById('cicilan-method-' + orderId);
@@ -6075,19 +6212,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let method = methodSelect ? methodSelect.value : 'Tunai';
 
         if (confirm('Simpan pembayaran sejumlah Rp ' + nominal.toLocaleString('id-ID') + ' (' + method + ')?')) {
-            const orderIdx = orderHistory.findIndex(o => o.id === orderId);
-            if (orderIdx > -1) {
-                let order = orderHistory[orderIdx];
-                order.dibayar = (order.dibayar || 0) + nominal;
-
-                if (!order.paymentHistory) order.paymentHistory = [];
+            const updated = window.persistOrderChange(orderId, (order) => {
+                order.dibayar = (parseFloat(order.dibayar) || 0) + nominal;
+                if (!Array.isArray(order.paymentHistory)) order.paymentHistory = [];
                 order.paymentHistory.push({
                     date: new Date().toISOString(),
                     amount: nominal,
                     method: method
                 });
-
-                localStorage.setItem('db_pemasukan', JSON.stringify(orderHistory));
+            });
+            if (updated) {
+                window.savePaymentOverride(updated);
                 renderDashboardPesanan();
                 if (window.Swal) Swal.fire('Berhasil', 'Pembayaran tersimpan!', 'success');
             }
@@ -6096,23 +6231,22 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.markAsPaid = function (orderId, method = 'Tunai') {
         if (confirm('Tandai transaksi ' + orderId + ' sebagai LUNAS (' + method + ')?')) {
-            const orderIdx = orderHistory.findIndex(o => o.id === orderId);
-            if (orderIdx > -1) {
-                let order = orderHistory[orderIdx];
-                let sisa = order.total - (order.dibayar || 0);
-
+            const updated = window.persistOrderChange(orderId, (order) => {
+                let sisa = (parseFloat(order.total) || 0) - (parseFloat(order.dibayar) || 0);
                 if (sisa > 0) {
-                    if (!order.paymentHistory) order.paymentHistory = [];
+                    if (!Array.isArray(order.paymentHistory)) order.paymentHistory = [];
                     order.paymentHistory.push({
                         date: new Date().toISOString(),
                         amount: sisa,
                         method: method
                     });
                 }
-
                 order.dibayar = order.total;
                 order.metodeBayar = method;
-                localStorage.setItem('db_pemasukan', JSON.stringify(orderHistory));
+                order.cashbox = method;
+            });
+            if (updated) {
+                window.savePaymentOverride(updated);
                 renderDashboardPesanan();
                 if (window.Swal) Swal.fire('Berhasil', 'Pesanan ditandai LUNAS!', 'success');
             }
@@ -6216,8 +6350,10 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 let row = document.createElement('div');
                 row.className = 'pesanan-row';
-                const currentStatus = order.status || 'validasi';
+                const currentStatus = window.normalizeOrderStatus ? window.normalizeOrderStatus(order.status) : String(order.status || 'validasi').toLowerCase().trim();
+                order.status = currentStatus;
                 row.setAttribute('data-status', currentStatus);
+                const stStyle = window.getStatusDropdownStyle ? window.getStatusDropdownStyle(currentStatus) : { bg: '#f8fafc', color: '#1e293b', border: '#cbd5e1' };
 
                 let dibayarNum = parseInt((order.dibayar || '').toString().replace(/[^0-9-]/g, '')) || 0;
                 let totalNum = parseInt((order.total || '').toString().replace(/[^0-9-]/g, '')) || 0;
@@ -6229,14 +6365,9 @@ document.addEventListener('DOMContentLoaded', () => {
                 let today = new Date();
                 today.setHours(0, 0, 0, 0);
 
-                if (order.date && typeof order.date === 'string') {
-                    let parts = order.date.split(' ')[0].split(/[\/-]/);
-                    if (parts.length === 3) {
-                        let y = parts[0].length === 4 ? parseInt(parts[0]) : parseInt(parts[2]);
-                        if (y < 100) y += 2000;
-                        let m = parseInt(parts[1]);
-                        let d = parts[0].length === 4 ? parseInt(parts[2]) : parseInt(parts[0]);
-                        let orderDate = new Date(y, m - 1, d);
+                if (order.date) {
+                    let orderDate = window.parseDateString ? window.parseDateString(order.date, order.id, order.estDate) : new Date(order.date);
+                    if (orderDate && !isNaN(orderDate.getTime())) {
                         orderDate.setHours(0, 0, 0, 0);
 
                         if (orderDate.getTime() === today.getTime()) {
@@ -6319,13 +6450,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 <!-- Col 8: Status Dropdown -->
                 <div class="p-col">
-                    <select class="status-dropdown" style="width: 100%; border-radius:8px; border:1px solid #cbd5e1; padding:6px 8px; font-size:0.8rem; background:#f8fafc; color:#1e293b; outline:none;">
-                        <option value="validasi" ${order.status === 'validasi' ? 'selected' : ''}>Validasi</option>
-                        <option value="antrian" ${order.status === 'antrian' ? 'selected' : ''}>Antrian</option>
-                        <option value="cuci-jemur" ${order.status === 'cuci-jemur' ? 'selected' : ''}>cuci/Jemur</option>
-                        <option value="setrika" ${order.status === 'setrika' ? 'selected' : ''}>Setrika</option>
-                        <option value="selesai" ${order.status === 'selesai' ? 'selected' : ''}>Selesai</option>
-                        <option value="diambil" ${order.status === 'diambil' ? 'selected' : ''}>Diambil</option>
+                    <select class="status-dropdown" style="width: 100%; border-radius:8px; border:1px solid ${stStyle.border}; padding:6px 8px; font-size:0.8rem; font-weight:700; background:${stStyle.bg}; color:${stStyle.color}; cursor:pointer; outline:none;">
+                        <option value="validasi" ${currentStatus === 'validasi' ? 'selected' : ''}>Validasi</option>
+                        <option value="antrian" ${currentStatus === 'antrian' ? 'selected' : ''}>Antrian</option>
+                        <option value="cuci-jemur" ${currentStatus === 'cuci-jemur' ? 'selected' : ''}>Cuci/Jemur</option>
+                        <option value="setrika" ${currentStatus === 'setrika' ? 'selected' : ''}>Setrika</option>
+                        <option value="selesai" ${currentStatus === 'selesai' ? 'selected' : ''}>Selesai</option>
+                        <option value="diambil" ${currentStatus === 'diambil' ? 'selected' : ''}>Diambil</option>
                     </select>
                 </div>
                 
@@ -6404,20 +6535,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
                 row.querySelector('.status-bayar-dropdown').addEventListener('change', (e) => {
                     let isSudah = e.target.value === 'lunas';
-                    order.dibayar = isSudah ? order.total : 0;
+                    row.setAttribute('data-payment-status', isSudah ? 'lunas' : 'belum');
                     e.target.style.backgroundColor = isSudah ? '#dcfce7' : '#fee2e2';
                     e.target.style.color = isSudah ? '#166534' : '#991b1b';
-                    localStorage.setItem('db_pemasukan', JSON.stringify(orderHistory));
+                    const updated = window.persistOrderChange(order.id, (o) => {
+                        o.dibayar = isSudah ? o.total : 0;
+                        if (isSudah && (!Array.isArray(o.paymentHistory) || o.paymentHistory.length === 0)) {
+                            o.paymentHistory = [{
+                                date: new Date().toISOString(),
+                                amount: o.total,
+                                method: o.cashbox || o.metodeBayar || 'Tunai'
+                            }];
+                        } else if (!isSudah) {
+                            o.paymentHistory = [];
+                        }
+                    });
+                    if (updated) window.savePaymentOverride(updated);
                     updateDashboardCounts();
                 });
 
                 row.querySelector('.status-dropdown').addEventListener('change', (e) => {
-                    order.status = e.target.value;
-                    row.setAttribute('data-status', order.status);
-                    localStorage.setItem('db_pemasukan', JSON.stringify(orderHistory));
-                    updateDashboardCounts();
-                    const activeChip = document.querySelector('.p-tab-btn.active');
-                    if (activeChip) filterPesanan(activeChip.getAttribute('data-filter'));
+                    window.updateOrderStatus(order.id, e.target.value, row, e.target);
                 });
 
                 dashContainer.appendChild(row);
@@ -6436,19 +6574,22 @@ document.addEventListener('DOMContentLoaded', () => {
     window.renderDashboardPesanan = renderDashboardPesanan;
 
     function updateDashboardCounts() {
+        let countsHistory = [];
         if (typeof window.getMergedPemasukan === 'function') {
-            orderHistory = window.getMergedPemasukan();
+            countsHistory = window.getMergedPemasukan();
+        } else if (Array.isArray(orderHistory) && orderHistory.length > 0) {
+            countsHistory = orderHistory;
         } else {
             try {
-                orderHistory = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
+                countsHistory = JSON.parse(localStorage.getItem('db_pemasukan') || '[]');
             } catch (e) { }
         }
-        if (!Array.isArray(orderHistory)) orderHistory = [];
+        if (!Array.isArray(countsHistory)) countsHistory = [];
 
         let today = new Date();
         today.setHours(0, 0, 0, 0);
 
-        let todayOrderHistory = orderHistory.filter(o => {
+        let todayOrderHistory = countsHistory.filter(o => {
             if (!o || !o.date) return false;
             let dObj = window.parseDateString ? window.parseDateString(o.date, o.id, o.estDate) : new Date(o.date);
             if (dObj && !isNaN(dObj.getTime())) {
@@ -6459,28 +6600,28 @@ document.addEventListener('DOMContentLoaded', () => {
         });
 
         let masukCount = todayOrderHistory.length;
-        let semuaCount = orderHistory.filter(o => {
+        let semuaCount = countsHistory.filter(o => {
             if (!o) return false;
-            const st = (o.status || 'validasi').toLowerCase();
+            const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase();
             return st !== 'selesai' && st !== 'diambil';
         }).length;
-        let validasiCount = orderHistory.filter(o => o && (o.status || 'validasi').toLowerCase() === 'validasi').length;
-        let antrianCount = orderHistory.filter(o => o && (o.status || '').toLowerCase() === 'antrian').length;
-        let cuciCount = orderHistory.filter(o => {
+        let validasiCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase()) === 'validasi').length;
+        let antrianCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'antrian').length;
+        let cuciCount = countsHistory.filter(o => {
             if (!o) return false;
-            const st = (o.status || '').toLowerCase();
+            const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase();
             return st === 'cuci-jemur' || st === 'cuci';
         }).length;
-        let setrikaCount = orderHistory.filter(o => o && (o.status || '').toLowerCase() === 'setrika').length;
-        let selesaiCount = orderHistory.filter(o => o && (o.status || '').toLowerCase() === 'selesai').length;
+        let setrikaCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'setrika').length;
+        let selesaiCount = countsHistory.filter(o => o && (window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || '').toLowerCase()) === 'selesai').length;
 
         // Hitung Harus Selesai (hari ini) dan Terlambat
         let harusSelesaiCount = 0;
         let terlambatCount = 0;
 
-        orderHistory.forEach(o => {
+        countsHistory.forEach(o => {
             if (!o) return;
-            const st = (o.status || 'validasi').toLowerCase();
+            const st = window.normalizeOrderStatus ? window.normalizeOrderStatus(o.status) : (o.status || 'validasi').toLowerCase();
             if (st !== 'selesai' && st !== 'diambil' && o.date) {
                 let orderDate = window.parseDateString ? window.parseDateString(o.date, o.id, o.estDate) : new Date(o.date);
                 if (orderDate && !isNaN(orderDate.getTime())) {

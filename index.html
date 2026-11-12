@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <!-- Non-blocking Charts & QR Code & Excel & Recovered Database -->
     <script src="xlsx.full.min.js"></script>
-    <script src="database_recovered.js?v=6.0"></script>
+    <script src="database_recovered.js?v=6.3"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js" defer></script>
 
-    <link rel="stylesheet" href="style.css?v=10">
+    <link rel="stylesheet" href="style.css?v=11">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" href="logo_manjur.png" type="image/png">
     <meta name="theme-color" content="#0284c7">
@@ -954,12 +954,12 @@
 
                         <!-- Filter Tabs (Chips) -->
                         <div class="pesanan-tabs-scroll">
-                            <button class="p-tab-btn active" data-filter="semua">Semua</button>
-                            <button class="p-tab-btn" data-filter="validasi">Validasi</button>
-                            <button class="p-tab-btn" data-filter="antrian">Antrian</button>
-                            <button class="p-tab-btn" data-filter="cuci-jemur">Cuci</button>
-                            <button class="p-tab-btn" data-filter="setrika">Setrika</button>
-                            <button class="p-tab-btn" data-filter="selesai">Selesai</button>
+                            <button class="p-tab-btn active" data-filter="semua" onclick="window.switchPesananTab && window.switchPesananTab(this)">Semua <span id="badge-semua" class="p-tab-badge">0</span></button>
+                            <button class="p-tab-btn" data-filter="validasi" onclick="window.switchPesananTab && window.switchPesananTab(this)">Validasi <span id="badge-validasi" class="p-tab-badge">0</span></button>
+                            <button class="p-tab-btn" data-filter="antrian" onclick="window.switchPesananTab && window.switchPesananTab(this)">Antrian <span id="badge-antrian" class="p-tab-badge">0</span></button>
+                            <button class="p-tab-btn" data-filter="cuci-jemur" onclick="window.switchPesananTab && window.switchPesananTab(this)">Cuci <span id="badge-cuci" class="p-tab-badge">0</span></button>
+                            <button class="p-tab-btn" data-filter="setrika" onclick="window.switchPesananTab && window.switchPesananTab(this)">Setrika <span id="badge-setrika" class="p-tab-badge">0</span></button>
+                            <button class="p-tab-btn" data-filter="selesai" onclick="window.switchPesananTab && window.switchPesananTab(this)">Selesai <span id="badge-selesai" class="p-tab-badge">0</span></button>
                         </div>
 
                         <!-- Header Row (Topline Wrapper) -->
@@ -4383,7 +4383,7 @@
         </div>
     </div>
 
-    <script src="main.js?v=6.2"></script>
+    <script src="main.js?v=6.3"></script>
 
     <script>
         // Register Service Worker for PWA (Installable on Mobile/Tablet)
@@ -4398,7 +4398,7 @@
         }
     </script>
     <script src="app.js"></script>
-    <script src="laporan.js?v=6.2"></script>
+    <script src="laporan.js?v=6.3"></script>
     <script>
         // AUTO-FIX DATE SCRIPT (Run once to fix corrupted dates)
         window.cleanDatabaseDates = function () {
@@ -4627,7 +4627,7 @@
         window.exportPesananKeExcel = function () {
             const activeChip = document.querySelector('.p-tab-btn.active');
             const filterName = activeChip ? activeChip.getAttribute('data-filter') : 'semua';
-            const filterLabel = activeChip ? activeChip.innerText.trim() : 'Semua';
+            const filterLabel = activeChip ? activeChip.innerText.replace(/\d+/g, '').trim() : 'Semua';
 
             let orderHistory = [];
             if (typeof window.getMergedPemasukan === 'function') {
@@ -4651,10 +4651,10 @@
                 if (order.type) return false; // exclude manual income
 
                 // Status chip filter
-                const status = (order.status || 'validasi').toLowerCase();
+                const status = window.normalizeOrderStatus ? window.normalizeOrderStatus(order.status) : (order.status || 'validasi').toLowerCase();
                 if (filterName !== 'semua') {
-                    if (filterName === 'cuci' && status !== 'cuci-jemur') return false;
-                    else if (filterName !== 'cuci' && status !== filterName) return false;
+                    if ((filterName === 'cuci' || filterName === 'cuci-jemur') && status !== 'cuci-jemur') return false;
+                    else if (filterName !== 'cuci' && filterName !== 'cuci-jemur' && status !== filterName) return false;
                 }
 
                 // Search keyword filter
